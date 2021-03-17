@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="17.2.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v17.2, Version=17.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Report1" Margins="0, 0, 0, 0" PageWidth="850" PageHeight="1100" Version="17.2" DataSource="#Ref-0">
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="TopMargin" HeightF="0" />
+    <Item2 Ref="3" ControlType="DetailBand" Name="Detail" HeightF="85.4166641">
+      <MultiColumn Ref="4" ColumnCount="8" Mode="UseColumnCount" />
+      <Controls>
+        <Item1 Ref="5" ControlType="XRBarCode" Name="barCode1" AutoModule="true" ShowText="false" SizeF="86.2499847,64.66666" LocationFloat="20.0000134, 10.0000067" Padding="10,10,0,0,100">
+          <Symbology Ref="6" Name="QRCode" CompactionMode="Byte" />
+          <ExpressionBindings>
+            <Item1 Ref="7" Expression="[TOSHIBA:TCTC 0296:DRAIN PAN M#2:1118320101:MD160007:W550L525H1000:2245]" PropertyName="Text" EventName="BeforePrint" />
+          </ExpressionBindings>
+        </Item1>
+      </Controls>
+    </Item2>
+    <Item3 Ref="8" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="0" />
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Excel.ExcelDataSource,DevExpress.DataAccess.v17.2" Name="excelDataSource1" Base64="PEV4Y2VsRGF0YVNvdXJjZSBOYW1lPSJleGNlbERhdGFTb3VyY2UxIiBGaWxlTmFtZT0iRDpcX1dvcmtcX19DdXJyZW50X0RXXE5pc3NoaW5ib1xkb2NcUVIyLnhsc3giPjxPcHRpb25zIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeGNlbC5FeGNlbFNvdXJjZU9wdGlvbnMiIFNraXBFbXB0eVJvd3M9InRydWUiIFVzZUZpcnN0Um93QXNIZWFkZXI9InRydWUiIFNraXBIaWRkZW5Db2x1bW5zPSJ0cnVlIiBTa2lwSGlkZGVuUm93cz0idHJ1ZSI+PEltcG9ydFNldHRpbmdzIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeGNlbC5FeGNlbFdvcmtzaGVldFNldHRpbmdzIiBXb3Jrc2hlZXROYW1lPSJTaGVldDEiIC8+PC9PcHRpb25zPjxTY2hlbWE+PEZpZWxkSW5mbyBOYW1lPSJUT1NISUJBOlRDVEMgMDI5NjpEUkFJTiBQQU4gTSMyOjExMTgzMjAxMDE6TUQxNjAwMDc6VzU1MEw1MjVIMTAwMDoyMjQ1IiBUeXBlPSJTeXN0ZW0uU3RyaW5nIiBTZWxlY3RlZD0idHJ1ZSIgLz48L1NjaGVtYT48UmVzdWx0U2NoZW1hPjxWaWV3PjxGaWVsZCBOYW1lPSJUT1NISUJBOlRDVEMgMDI5NjpEUkFJTiBQQU4gTSMyOjExMTgzMjAxMDE6TUQxNjAwMDc6VzU1MEw1MjVIMTAwMDoyMjQ1IiBUeXBlPSJTdHJpbmciIC8+PC9WaWV3PjwvUmVzdWx0U2NoZW1hPjwvRXhjZWxEYXRhU291cmNlPg==" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A42E283F-CFC7-4C5D-9AEC-A777FB46C79D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Barcode_Verify.My.MyApplication</StartupObject>
+    <RootNamespace>Barcode_Verify</RootNamespace>
+    <AssemblyName>Barcode_Verify</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Barcode_Verify.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Barcode_Verify.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1531735-logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Animator, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Animator.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonComponent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\CommonComponent.dll</HintPath>
+    </Reference>
+    <Reference Include="DatabaseConnection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DatabaseConnection.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v17.2.Export, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v17.2.UI, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.ReportDesigner.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v17.2.UI, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v17.2.Wizard, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v17.2.Core, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v17.2.Win, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v17.2.Extensions, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v17.2, Version=17.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>D:\_Work\_SATO\TOKUMI\TOKUMI_PRINT_LOG_2017.11.01 #BOSS.1.0.1.0\TOKUMI_PRINT_LOG\bin\x64\Debug\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>D:\_Work\_SATO\TOKUMI\TOKUMI_PRINT_LOG_2017.11.01 #BOSS.1.0.1.0\TOKUMI_PRINT_LOG\bin\x64\Debug\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>D:\_Work\_SATO\TOKUMI\TOKUMI_PRINT_LOG_2017.11.01 #BOSS.1.0.1.0\TOKUMI_PRINT_LOG\bin\x64\Debug\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="SATOLib.Database.OLE">
+      <HintPath>..\..\..\..\..\..\EXAMPLE\Class\sato-library-master\SATOLib\SATOLib.Database.OLE\bin\Release\SATOLib.Database.OLE.dll</HintPath>
+    </Reference>
+    <Reference Include="SDK.NET.Interface, Version=17.2.0.0, Culture=neutral, PublicKeyToken=865eaf3445b2ea56, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\SDK.NET.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Deployment">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Barcode_verify\frmBarcodeVerification.Designer.vb">
+      <DependentUpon>frmBarcodeVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Barcode_verify\frmBarcodeVerification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Check_Status_Printer\ModSync.vb" />
+    <Compile Include="Fn_LockScreen\abcLockScreen.vb" />
+    <Compile Include="Fn_LockScreen\abcLockSystemParameters.vb" />
+    <Compile Include="Fn_LockScreen\BackgroundForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Design\frmDesign_Format.designer.vb">
+      <DependentUpon>frmDesign_Format.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Design\frmDesign_Format.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Design\frmDesign_Icon.Designer.vb">
+      <DependentUpon>frmDesign_Icon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Design\frmDesign_Icon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fn_LockScreen\Form2.designer.vb">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fn_LockScreen\Form2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fn_LockScreen\frmLockScreen.designer.vb">
+      <DependentUpon>frmLockScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Fn_LockScreen\frmLockScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fn_LockScreen\Native.vb" />
+    <Compile Include="My Project\Settings2.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Plan\frmEditQty.Designer.vb">
+      <DependentUpon>frmEditQty.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Plan\frmEditQty.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plan\frmImport1.Designer.vb">
+      <DependentUpon>frmImport1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Plan\frmImport1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Print\frmPrintLabel.Designer.vb">
+      <DependentUpon>frmPrintLabel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Print\frmPrintLabel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Print\frmReport_PrintLabel.Designer.vb">
+      <DependentUpon>frmReport_PrintLabel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Print\frmReport_PrintLabel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Barcode_verify\frmReport_BarcodeVerification.Designer.vb">
+      <DependentUpon>frmReport_BarcodeVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Barcode_verify\frmReport_BarcodeVerification.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Print\Uc_Report_PrintLabel.Designer.vb">
+      <DependentUpon>Uc_Report_PrintLabel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Print\Uc_Report_PrintLabel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Barcode_verify\Uc_Report_BarcodeVerification.Designer.vb">
+      <DependentUpon>Uc_Report_BarcodeVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Barcode_verify\Uc_Report_BarcodeVerification.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="frmKeyNum.Designer.vb">
+      <DependentUpon>frmKeyNum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmKeyNum.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Check_Status_Printer\FrmCheck_Status_Printer.designer.vb">
+      <DependentUpon>FrmCheck_Status_Printer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Check_Status_Printer\FrmCheck_Status_Printer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfigDb.designer.vb">
+      <DependentUpon>frmConfigDb.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfigDb.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainMenu.designer.vb">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainribbon.Designer.vb">
+      <DependentUpon>frmMainribbon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainribbon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmMaster_MC.Designer.vb">
+      <DependentUpon>frmMaster_MC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmMaster_MC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmMaster_MC_EDIT.designer.vb">
+      <DependentUpon>frmMaster_MC_EDIT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmMaster_MC_EDIT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmMaster_Product.Designer.vb">
+      <DependentUpon>frmMaster_Product.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmMaster_Product.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Master\frmMaster_Product_EDIT.designer.vb">
+      <DependentUpon>frmMaster_Product_EDIT.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Master\frmMaster_Product_EDIT.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Module\ConnectionString.vb" />
+    <Compile Include="Module\ModClasses.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TOOLS\frm_ShowPic.designer.vb">
+      <DependentUpon>frm_ShowPic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TOOLS\frm_ShowPic.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TOOLS\lbSticker.Designer.vb">
+      <DependentUpon>lbSticker.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TOOLS\lbSticker.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TOOLS\sp_Report_Doc.designer.vb">
+      <DependentUpon>sp_Report_Doc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TOOLS\sp_Report_Doc.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TOOLS\XtraReport1.Designer.vb">
+      <DependentUpon>XtraReport1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TOOLS\XtraReport1.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="User_Management\frmUser.designer.vb">
+      <DependentUpon>frmUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="User_Management\frmUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_Management\frm_Add_User.designer.vb">
+      <DependentUpon>frm_Add_User.vb</DependentUpon>
+    </Compile>
+    <Compile Include="User_Management\frm_Add_User.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_Management\frm_Edit_User.designer.vb">
+      <DependentUpon>frm_Edit_User.vb</DependentUpon>
+    </Compile>
+    <Compile Include="User_Management\frm_Edit_User.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_Management\frm_User_Master.designer.vb">
+      <DependentUpon>frm_User_Master.vb</DependentUpon>
+    </Compile>
+    <Compile Include="User_Management\frm_User_Master.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_Management\tls_UserType.designer.vb">
+      <DependentUpon>tls_UserType.vb</DependentUpon>
+    </Compile>
+    <Compile Include="User_Management\tls_UserType.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User_Management\_frmAddTypeUser.designer.vb">
+      <DependentUpon>_frmAddTypeUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="User_Management\_frmAddTypeUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualEffects\GuideFlyoutPanel.Designer.vb">
+      <DependentUpon>GuideFlyoutPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VisualEffects\GuideFlyoutPanel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XtraForm1.Designer.vb">
+      <DependentUpon>XtraForm1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="XtraForm1.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_C\Connection.vb" />
+    <Compile Include="_C\C_Error_Log.vb" />
+    <Compile Include="_C\C_Transfer_File.vb" />
+    <Compile Include="_C\C_Variable.vb" />
+    <Compile Include="_C\C_VERSION.vb" />
+    <Compile Include="_C\Mdl_Core.vb" />
+    <Compile Include="_C_AlertMessage\CLS_ALERT_UI.vb" />
+    <Compile Include="_C_AlertMessage\C_SOUND.vb" />
+    <Compile Include="_C_AlertMessage\C_SOUND_Error.vb" />
+    <Compile Include="_C_AlertMessage\frmAlertInfo_Small.designer.vb">
+      <DependentUpon>frmAlertInfo_Small.vb</DependentUpon>
+    </Compile>
+    <Compile Include="_C_AlertMessage\frmAlertInfo_Small.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_C_AlertMessage\frm_Inputbox.designer.vb">
+      <DependentUpon>frm_Inputbox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="_C_AlertMessage\frm_Inputbox.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Barcode_verify\frmBarcodeVerification.resx">
+      <DependentUpon>frmBarcodeVerification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fn_LockScreen\BackgroundForm.resx">
+      <DependentUpon>BackgroundForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\frmDesign_Format.resx">
+      <DependentUpon>frmDesign_Format.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Design\frmDesign_Icon.resx">
+      <DependentUpon>frmDesign_Icon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fn_LockScreen\Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fn_LockScreen\frmLockScreen.resx">
+      <DependentUpon>frmLockScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\frmEditQty.resx">
+      <DependentUpon>frmEditQty.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plan\frmImport1.resx">
+      <DependentUpon>frmImport1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Print\frmPrintLabel.resx">
+      <DependentUpon>frmPrintLabel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Print\frmReport_PrintLabel.resx">
+      <DependentUpon>frmReport_PrintLabel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Barcode_verify\frmReport_BarcodeVerification.resx">
+      <DependentUpon>frmReport_BarcodeVerification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Print\Uc_Report_PrintLabel.resx">
+      <DependentUpon>Uc_Report_PrintLabel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Barcode_verify\Uc_Report_BarcodeVerification.resx">
+      <DependentUpon>Uc_Report_BarcodeVerification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKeyNum.resx">
+      <DependentUpon>frmKeyNum.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Check_Status_Printer\FrmCheck_Status_Printer.resx">
+      <DependentUpon>FrmCheck_Status_Printer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfigDb.resx">
+      <DependentUpon>frmConfigDb.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainribbon.resx">
+      <DependentUpon>frmMainribbon.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmMaster_MC.resx">
+      <DependentUpon>frmMaster_MC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmMaster_MC_EDIT.resx">
+      <DependentUpon>frmMaster_MC_EDIT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmMaster_Product.resx">
+      <DependentUpon>frmMaster_Product.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\frmMaster_Product_EDIT.resx">
+      <DependentUpon>frmMaster_Product_EDIT.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TOOLS\frm_ShowPic.resx">
+      <DependentUpon>frm_ShowPic.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TOOLS\lbSticker.resx">
+      <DependentUpon>lbSticker.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TOOLS\sp_Report_Doc.resx">
+      <DependentUpon>sp_Report_Doc.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TOOLS\XtraReport1.resx">
+      <DependentUpon>XtraReport1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Management\frmUser.resx">
+      <DependentUpon>frmUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Management\frm_Add_User.resx">
+      <DependentUpon>frm_Add_User.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Management\frm_Edit_User.resx">
+      <DependentUpon>frm_Edit_User.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Management\frm_User_Master.resx">
+      <DependentUpon>frm_User_Master.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Management\tls_UserType.resx">
+      <DependentUpon>tls_UserType.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_Management\_frmAddTypeUser.resx">
+      <DependentUpon>_frmAddTypeUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualEffects\GuideFlyoutPanel.resx">
+      <DependentUpon>GuideFlyoutPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraForm1.resx">
+      <DependentUpon>XtraForm1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_C_AlertMessage\frmAlertInfo_Small.resx">
+      <DependentUpon>frmAlertInfo_Small.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_C_AlertMessage\frm_Inputbox.resx">
+      <DependentUpon>frm_Inputbox.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings2.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Design\format\" />
+    <Folder Include="Label\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profilereport.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1531735-logo.ico" />
+    <Content Include="hiapphere_com_dark_unicorn_icons_ddt_y2y_icon.ico" />
+    <None Include="Resources\Sound.wav" />
+    <None Include="Resources\SoundError.wav" />
+    <Content Include="siren.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
