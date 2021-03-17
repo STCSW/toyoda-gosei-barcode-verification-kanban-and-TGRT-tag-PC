@@ -294,6 +294,7 @@ Public Class frmImport1
 
         If DGV.RowCount > 0 Then
 
+
             Dim tr As New DatabaseConnection.SQLConnect.Trans(cs)
             Dim Str_commad As New StringBuilder()
             PGB1.Properties.Maximum = DGV.RowCount
