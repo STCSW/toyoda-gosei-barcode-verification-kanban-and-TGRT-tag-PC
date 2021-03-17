@@ -145,15 +145,8 @@ Public Class frmImport1
         Dim DT As DataTable
         Cursor.Current = Cursors.WaitCursor
 
-
         Try
-
-            ' Dim dig1 As OpenFileDialog
-            'dig1.FileName = "import_Production*"
-            'dig1.Filter = "CSV Files|*.csv"
-            ' Dim FilesPath As String = OpenFileDialog("Excel")
             Dim FilesPath As String = OpenFileDialog("*.xlsx;*.xls;*.xlsm", , , My.Settings.stLastFilePath)
-            '  Dim FilesPath As String = dig1.ShowDialog
 
             If FilesPath.Trim = "" Then
                 Cursor.Current = Cursors.Arrow
@@ -164,103 +157,21 @@ Public Class frmImport1
             My.Settings.Save()
             Dim data_array() As String
 
-
-            'If File.Exists(FilesPath) Then
-            '    Using objReader As New StreamReader(FilesPath)
-            '        Dim tmpRead_data As String = objReader.ReadLine()
-            '        If tmpRead_data.Trim.Length > 0 Then
-            '            'MessageBox.Show(tmpRead_data)
-            '            data_array = tmpRead_data.Split("|")
-            '        End If
-            '    End Using
-            'End If
-
-            'If data_array.Length <> "14" Then
-
-            '    MessageBox.Show("Inccorect format Please check your file!!!.")
-            '    Return
-            'End If
-
-            'Dim Table1 As DataTable
-            'Table1 = New DataTable("TableName")
-            'Dim column1 As DataColumn = New DataColumn("Customer Code")
-            'Dim column2 As DataColumn = New DataColumn("PO NO.")
-            'Dim column3 As DataColumn = New DataColumn("Part No")
-            'Dim column4 As DataColumn = New DataColumn("Job No")
-            'Dim column5 As DataColumn = New DataColumn("Product Lot")
-            'Dim column6 As DataColumn = New DataColumn("Qty Order")
-            'Dim column7 As DataColumn = New DataColumn("Qty box of Order")
-            'Dim column8 As DataColumn = New DataColumn("Qty per box")
-            'Dim column9 As DataColumn = New DataColumn("First No box")
-            'Dim column10 As DataColumn = New DataColumn("Last No box")
-            'Dim column11 As DataColumn = New DataColumn("Satetystock(%)")
-            'Dim column12 As DataColumn = New DataColumn("Machine size(ton)")
-            'Dim column13 As DataColumn = New DataColumn("Material Code")
-            'Dim column14 As DataColumn = New DataColumn("Mat'l mix(%)")
-
-
-            'column1.DataType = System.Type.GetType("System.String")
-            'column2.DataType = System.Type.GetType("System.String")
-            'column3.DataType = System.Type.GetType("System.String")
-            'column4.DataType = System.Type.GetType("System.String")
-            'column5.DataType = System.Type.GetType("System.String")
-            'column6.DataType = System.Type.GetType("System.String")
-            'column7.DataType = System.Type.GetType("System.String")
-            'column8.DataType = System.Type.GetType("System.String")
-            'column9.DataType = System.Type.GetType("System.String")
-            'column10.DataType = System.Type.GetType("System.String")
-            'column11.DataType = System.Type.GetType("System.String")
-            'column12.DataType = System.Type.GetType("System.String")
-            'column13.DataType = System.Type.GetType("System.String")
-            'column14.DataType = System.Type.GetType("System.String")
-
-            'Table1.Columns.Add(column1)
-            'Table1.Columns.Add(column2)
-            'Table1.Columns.Add(column3)
-            'Table1.Columns.Add(column4)
-            'Table1.Columns.Add(column5)
-            'Table1.Columns.Add(column6)
-            'Table1.Columns.Add(column7)
-            'Table1.Columns.Add(column8)
-            'Table1.Columns.Add(column9)
-            'Table1.Columns.Add(column10)
-            'Table1.Columns.Add(column11)
-            'Table1.Columns.Add(column12)
-            'Table1.Columns.Add(column13)
-            'Table1.Columns.Add(column14)
-            'Dim Row1 As DataRow
-            'Row1 = Table1.NewRow()
-            'For i = 0 To 13
-            '    Row1.Item(i) = data_array(i)
-            'Next
-
-            'Table1.Rows.Add(Row1)
-
-
-
-
-            'DT = Table1
             DT = Import_xls_To_Datatable(FilesPath)
             DT.Columns.Add("ImportStatus")
-            'DT.Columns.Add("ExRemark")
             GridControl1.DataSource = DT
 
-            '   DGV.Appearance.Row.FRONT = GridFRONT()
-            '  DGV.Appearance.HeaderPanel.FRONT = GridHeaderFRONT()
             If DGV.RowCount <= 5000 Then DGV.BestFitColumns()
             SimpleButton4.Enabled = True
+
         Catch ex As Exception
-            ' Msg("Can not Open file:" & ex.Message.ToString.Trim, "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Cursor.Current = Cursors.Arrow
         End Try
         Cursor.Current = Cursors.Arrow
     End Sub
     Private Sub SimpleButton3_Click(sender As Object, e As EventArgs) Handles SimpleButton3.Click
-        'If pImport_Type = "PDT" Then
-        '    Call Import_file_PDT()
-        'ElseIf pImport_Type = "PDMS" Then
+
         Call Import_file_PDMS()
-        ' End If
 
     End Sub
 
@@ -383,44 +294,32 @@ Public Class frmImport1
 
         If DGV.RowCount > 0 Then
 
-
-
             Dim tr As New DatabaseConnection.SQLConnect.Trans(cs)
-            '  Dim dt As DataTable = SP_New_PLANNO()
-            ' Dim pPlanNO_NEW As String = dt.Rows(0).Item(0)
             Dim Str_commad As New StringBuilder()
             PGB1.Properties.Maximum = DGV.RowCount
 
-
-
-
             Dim Arr_Duplicate_Count() As Integer
             ReDim Arr_Duplicate_Count(DGV.RowCount - 1)
+
             For i = 0 To DGV.RowCount - 1
                 Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
                 Dim row As DataRowView = view.GetRow(i)
                 Dim Imp_Status As String
+
                 If Imp_Status <> "OK" Then
-                    'Dim aa As DateTime = CDate(row.Item(0).ToString.Trim()).ToString("yyyy/MM/dd ") & CDate(Format(row.Item(1).ToString.Trim("HH:mm:ss")))
+
                     Dim tmp_ProductCode As String = (row.Item(1).ToString.Trim)
 
-
                     If Check_Duplicate_Product_MS(tmp_ProductCode) = True Then
+
                         row.Item("ImportStatus") = "Update data"
                         Imp_Status = "Update data"
-                        ' Errcount = Errcount + 1
-                        'status update
 
                     End If
 
                 End If
 
             Next i
-
-
-
-
-
 
             For i = 0 To DGV.RowCount - 1
                 Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
@@ -429,12 +328,7 @@ Public Class frmImport1
                 Application.DoEvents()
                 Dim PartType As String = ""
 
-
-
                 Dim Imp_Status As String
-
-
-
 
                 Try
                     Imp_Status = row.Item("ImportStatus").ToString.Trim
@@ -442,10 +336,7 @@ Public Class frmImport1
                     Imp_Status = ""
                 End Try
 
-
-
                 Dim msg As String = String.Empty
-
 
                 If Imp_Status = "OK" Then
 
@@ -503,21 +394,6 @@ Public Class frmImport1
                             row.Item("ImportStatus") = "OK"
                         End If
 
-
-                        'If tr.ExcuteTran(Str_commad.ToString, False) = False Then
-
-                        '    row.Item("ImportStatus") = "Error"
-
-                        '    Errcount = Errcount + 1
-
-                        'Else
-                        '    row.Item("ImportStatus") = "OK"
-
-
-                        'End If
-
-
-
                     Catch ex As Exception
 
                         MessageBox.Show("Incorrect Import format " & ex.Message.ToString, "", MessageBoxButtons.OK, MessageBoxIcon.Stop)
@@ -526,13 +402,8 @@ Public Class frmImport1
                         Return False
 
                     End Try
-
                 Else
-
-
                     Try
-
-
                         With Str_commad
 
                             Str_commad.Remove(0, Str_commad.Length)
@@ -546,7 +417,6 @@ Public Class frmImport1
                             .Append(",[f_Part_No]")
                             .Append(",[f_Location]")
                             .Append(",[f_Cut_Digit_Length]")
-
 
                             .Append(",[f_User_Import]")
                             .Append(",[f_User_Edit]")
@@ -593,8 +463,6 @@ Public Class frmImport1
                             row.Item("ImportStatus") = "OK"
                         End With
 
-
-
                         msg = tr.ExcuteTranMsg(Str_commad.ToString)
                         If msg <> "" Then
                             'If msg = String.Empty Then
@@ -606,20 +474,6 @@ Public Class frmImport1
                             row.Item("ImportStatus") = "OK"
                         End If
 
-                        'If tr.ExcuteTran(Str_commad.ToString, False) = False Then
-
-                        '    row.Item("ImportStatus") = "Error"
-
-                        '    Errcount = Errcount + 1
-
-                        'Else
-                        '    row.Item("ImportStatus") = "OK"
-
-
-                        'End If
-
-
-
                     Catch ex As Exception
 
                         MessageBox.Show("Incorrect Import format " & ex.Message.ToString, "", MessageBoxButtons.OK, MessageBoxIcon.Stop)
@@ -629,13 +483,9 @@ Public Class frmImport1
 
                     End Try
 
-
-
-
                 End If
 
             Next
-
 
             If Errcount > 0 Then
 
@@ -655,18 +505,12 @@ Public Class frmImport1
 
                 tr.CommitTran(True)
 
-
                 MessageBox.Show(Me, "Import Success", "Success.", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             End If
 
             SimpleButton4.Enabled = False
-            ' GridControl1.DataSource = Nothing
-
-
         End If
-
-
     End Function
 
 
@@ -679,7 +523,7 @@ Public Class frmImport1
 
 
             Dim tr As New DatabaseConnection.SQLConnect.Trans(cs)
-           
+
             Dim Str_commad As New StringBuilder()
             PGB1.Properties.Maximum = DGV.RowCount
 
@@ -737,7 +581,7 @@ Public Class frmImport1
                     End If
 
 
-                  
+
 
                 End If
 
