@@ -133,7 +133,7 @@ Public Class frmImport1
             '   DGV.Appearance.Row.FRONT = GridFRONT()
             '  DGV.Appearance.HeaderPanel.FRONT = GridHeaderFRONT()
             If DGV.RowCount <= 5000 Then DGV.BestFitColumns()
-            SimpleButton4.Enabled = True
+            btn_import.Enabled = True
         Catch ex As Exception
             ' Msg("Can not Open file:" & ex.Message.ToString.Trim, "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Cursor.Current = Cursors.Arrow
@@ -158,39 +158,33 @@ Public Class frmImport1
             Dim data_array() As String
 
             DT = Import_xls_To_Datatable(FilesPath)
-            DT.Columns.Add("ImportStatus")
             GridControl1.DataSource = DT
 
             If DGV.RowCount <= 5000 Then DGV.BestFitColumns()
-            SimpleButton4.Enabled = True
+            btn_import.Enabled = True
 
         Catch ex As Exception
             Cursor.Current = Cursors.Arrow
         End Try
         Cursor.Current = Cursors.Arrow
     End Sub
-    Private Sub SimpleButton3_Click(sender As Object, e As EventArgs) Handles SimpleButton3.Click
+    Private Sub SimpleButton3_Click(sender As Object, e As EventArgs) Handles btn_browse.Click
 
         Call Import_file_PDMS()
 
     End Sub
 
-    Private Sub SimpleButton4_Click(sender As Object, e As EventArgs) Handles SimpleButton4.Click
+    Private Sub SimpleButton4_Click(sender As Object, e As EventArgs) Handles btn_import.Click
         Cursor.Current = Cursors.WaitCursor
         GridControl1.Enabled = False
-        SimpleButton3.Enabled = False
-        SimpleButton4.Enabled = False
+        btn_browse.Enabled = False
+        btn_import.Enabled = False
 
-
-        ' If pImport_Type = "PDT" Then
-        ' Call ImportPDTMaster()
-        ' ElseIf pImport_Type = "PDMS" Then
         Call ImportProductMaster()
-        ' End If
 
         GridControl1.Enabled = True
-        SimpleButton3.Enabled = True
-        SimpleButton4.Enabled = True
+        btn_browse.Enabled = True
+        btn_import.Enabled = True
 
         Cursor.Current = Cursors.Arrow
     End Sub
@@ -289,229 +283,120 @@ Public Class frmImport1
         Return False
     End Function
     Private Function ImportProductMaster() As Boolean
-
-        Dim Errcount As Integer = 0
-
-        If DGV.RowCount > 0 Then
-
-
-            Dim tr As New DatabaseConnection.SQLConnect.Trans(cs)
-            Dim Str_commad As New StringBuilder()
+        Try
+            Dim Errcount As Integer = 0
             PGB1.Properties.Maximum = DGV.RowCount
+            If DGV.RowCount > 0 Then
 
-            Dim Arr_Duplicate_Count() As Integer
-            ReDim Arr_Duplicate_Count(DGV.RowCount - 1)
-
-            For i = 0 To DGV.RowCount - 1
-                Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
-                Dim row As DataRowView = view.GetRow(i)
-                Dim Imp_Status As String
-
-                If Imp_Status <> "OK" Then
-
+                For index = 1 To DGV.RowCount - 1
+                    PGB1.Text = index
+                    Application.DoEvents()
+                    Dim View As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
+                    Dim row As DataRowView = View.GetRow(index)
                     Dim tmp_ProductCode As String = (row.Item(1).ToString.Trim)
 
-                    If Check_Duplicate_Product_MS(tmp_ProductCode) = True Then
+                    Dim resCheckDup As String = CheckDup(tmp_ProductCode)
 
-                        row.Item("ImportStatus") = "Update data"
-                        Imp_Status = "Update data"
+                    If resCheckDup = "ADD" Then
 
+                        Dim StrSQL As New StringBuilder()
+
+                        StrSQL.Append("Insert into Tbl_Master_Product(")
+                        StrSQL.Append("f_TGRT_Code")
+                        StrSQL.Append(",f_TGRT_Barcode")
+                        StrSQL.Append(",f_Customer_Barcode")
+                        StrSQL.Append(",f_Part_Name")
+                        StrSQL.Append(",f_Part_No")
+                        StrSQL.Append(",f_Location")
+                        StrSQL.Append(",f_User_Import")
+                        StrSQL.Append(",f_User_Edit")
+                        StrSQL.Append(",f_Import_TimeStamp")
+                        StrSQL.Append(",f_Edit_TimeStamp")
+                        StrSQL.Append(",f_Cut_Digit_Length")
+                        StrSQL.Append(")")
+                        StrSQL.Append("Values(")
+                        StrSQL.Append("'" & row.Item(1).ToString.Trim & "'")
+                        StrSQL.Append(",'" & row.Item(2).ToString.Trim & "'")
+                        StrSQL.Append(",'" & row.Item(3).ToString.Trim & "'")
+                        StrSQL.Append(",'" & row.Item(4).ToString.Trim & "'")
+                        StrSQL.Append(",'" & row.Item(5).ToString.Trim & "'")
+                        StrSQL.Append(",'" & row.Item(6).ToString.Trim & "'")
+                        StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
+                        StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
+                        StrSQL.Append(", Now() ")
+                        StrSQL.Append(", Now() ")
+                        StrSQL.Append(",'0'")
+                        StrSQL.Append(")")
+                        DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
+
+                    ElseIf resCheckDup = "EDIT" Then
+
+                        Dim StrSQL As New StringBuilder()
+
+                        StrSQL.Append("Update Tbl_Master_Product Set")
+                        StrSQL.Append(" f_TGRT_Barcode =")
+                        StrSQL.Append(" '" & row.Item(2).ToString.Trim & "'")
+                        StrSQL.Append(",f_Customer_Barcode =")
+                        StrSQL.Append(" '" & row.Item(3).ToString.Trim & "'")
+                        StrSQL.Append(",f_Part_Name =")
+                        StrSQL.Append(" '" & row.Item(4).ToString.Trim & "'")
+                        StrSQL.Append(",f_Part_No =")
+                        StrSQL.Append(" '" & row.Item(5).ToString.Trim & "'")
+                        StrSQL.Append(",f_Location =")
+                        StrSQL.Append(" '" & row.Item(6).ToString.Trim & "'")
+                        StrSQL.Append(",f_User_Import =")
+                        StrSQL.Append(" '" & C_Variable.USER_LOGIN & "'")
+                        StrSQL.Append(",f_User_Edit =")
+                        StrSQL.Append(" '" & C_Variable.USER_LOGIN & "'")
+                        StrSQL.Append(",f_Edit_TimeStamp =")
+                        StrSQL.Append(" Now() ")
+                        StrSQL.Append(" Where f_TGRT_Code =")
+                        StrSQL.Append("'" & row.Item(1).ToString.Trim & "'")
+
+                        DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
+
+                    Else
+                        'ERROR
+                        MessageBox.Show("Cannot get data from database", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+                        Exit For
                     End If
 
-                End If
-
-            Next i
-
-            For i = 0 To DGV.RowCount - 1
-                Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
-                Dim row As DataRowView = view.GetRow(i)
-                PGB1.EditValue = i + 1
+                Next
+                PGB1.Text = 0
                 Application.DoEvents()
-                Dim PartType As String = ""
-
-                Dim Imp_Status As String
-
-                Try
-                    Imp_Status = row.Item("ImportStatus").ToString.Trim
-                Catch ex As Exception
-                    Imp_Status = ""
-                End Try
-
-                Dim msg As String = String.Empty
-
-                If Imp_Status = "OK" Then
-
-                ElseIf Imp_Status = "Duplicate Data [JOB NO]" Then
-
-                ElseIf Imp_Status = "Not sorted datetime" Then
-
-                ElseIf Imp_Status = ", QTY OVER 10" Then
-
-                ElseIf Imp_Status = "Update data" Then
-                    Try
-                        With Str_commad
-                            Dim j As Integer = 2
-                            'Case 1, 4, 5
-
-                            Str_commad.Remove(0, Str_commad.Length)
-                            .Append("UPDATE [dbo].[tbl_Master_Product] ")
-                            .Append(" set")
-                            '.Append("[f_TGRT_Code]='" & IIf(IsDBNull(row.Item(j).ToString.Trim()), "", row.Item(j).ToString.Trim) & "'")
-                            ' j = j + 1
-                            .Append("[f_TGRT_Barcode]=N'" & IIf(IsDBNull(row.Item(j).ToString.Trim().Replace("*", "")), "", row.Item(j).ToString.Trim.Replace("*", "")) & "'")
-                            j = j + 1
-                            .Append(",[f_Customer_Barcode]=N'" & IIf(IsDBNull(row.Item(j).ToString.Trim().Replace("*", "")), "", row.Item(j).ToString.Trim.Replace("*", "")) & "'")
-                            j = j + 1
-                            .Append(",[f_Part_Name]=N'" & IIf(IsDBNull(row.Item(j).ToString.Trim()), "", row.Item(j).ToString.Trim) & "'")
-                            j = j + 1
-                            .Append(",[f_Part_No]=N'" & IIf(IsDBNull(row.Item(j).ToString.Trim()), "", row.Item(j).ToString.Trim) & "'")
-                            j = j + 1
-                            .Append(",[f_Location]=N'" & IIf(IsDBNull(row.Item(j).ToString.Trim()), "", row.Item(j).ToString.Trim) & "'")
-                            j = j + 1
-                            .Append(",[f_Cut_Digit_Length]=N'" & IIf(IsDBNull(row.Item(j).ToString.Trim()), "10", row.Item(j).ToString.Trim) & "'")
-                            j = j + 1
-
-                            .Append(",[f_User_Import]=N'" & C_Variable.USER_LOGIN & "'")
-                            .Append(",[f_User_Edit]=N'" & C_Variable.USER_LOGIN & "'")
-                            .Append(",[f_Import_TimeStamp]=getdate()")
-                            .Append(",[f_Edit_TimeStamp]=getdate()")
-
-
-                            .Append(" where  [f_TGRT_Code] ='" & row.Item(1).ToString & "'")
-
-                            row.Item("ImportStatus") = "OK"
-                        End With
-
-
-
-                        msg = tr.ExcuteTranMsg(Str_commad.ToString)
-                        If msg <> "" Then
-                            'If msg = String.Empty Then
-                            row.Item("ImportStatus") = "Error: " & msg
-
-
-                            Errcount = Errcount + 1
-                        Else
-                            row.Item("ImportStatus") = "OK"
-                        End If
-
-                    Catch ex As Exception
-
-                        MessageBox.Show("Incorrect Import format " & ex.Message.ToString, "", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-                        tr.Rollback()
-                        Cursor.Current = Cursors.Arrow
-                        Return False
-
-                    End Try
-                Else
-                    Try
-                        With Str_commad
-
-                            Str_commad.Remove(0, Str_commad.Length)
-                            .Append("INSERT INTO [dbo].[tbl_Master_Product]")
-                            .Append("(")
-                            .Append("[f_TGRT_Code]")
-                            .Append(",[f_TGRT_Barcode]")
-                            .Append(",[f_Customer_Barcode]")
-                            .Append(",[f_Part_Name]")
-
-                            .Append(",[f_Part_No]")
-                            .Append(",[f_Location]")
-                            .Append(",[f_Cut_Digit_Length]")
-
-                            .Append(",[f_User_Import]")
-                            .Append(",[f_User_Edit]")
-                            .Append(",[f_Import_TimeStamp]")
-                            .Append(",[f_Edit_TimeStamp]")
-
-                            .Append(" ) VALUES (")
-                            'Edit เพิ่ม molder เปลี่ยน 59 >>>60 2018-07-06
-                            'Edit เพิ่ม injection เปลี่ยน 60 >>>61 2018-11-15
-                            For j = 1 To 7
-
-                                Select Case j
-
-                                    Case 0
-                                        Continue For
-                                    Case 1
-                                        .Append(" N'" & IIf(IsDBNull(row.Item(j).ToString.Trim().Replace("\", "_").Replace("/", "_").Replace(":", "_").Replace("*", "_").Replace("?", "_").Replace("""", "_").Replace("<", "_").Replace(">", "_").Replace("|", "_")), "", row.Item(j).ToString.Trim.Replace("\", "_").Replace("/", "_").Replace(":", "_").Replace("*", "_").Replace("?", "_").Replace("""", "_").Replace("<", "_").Replace(">", "_").Replace("|", "_")) & "'")
-
-
-                                    Case 2
-
-                                        .Append(",")
-                                        .Append(" N'" & IIf(IsDBNull(row.Item(j).ToString.Trim().Replace("*", "")), "", row.Item(j).ToString.Trim.Replace("*", "")) & "'")
-                                    Case 3
-                                        .Append(",")
-                                        .Append(" N'" & IIf(IsDBNull(row.Item(j).ToString.Trim().Replace("*", "")), "", row.Item(j).ToString.Trim.Replace("*", "")) & "'")
-
-                                    Case Else
-                                        If j <> 1 Then
-                                            .Append(",")
-                                        End If
-
-                                        .Append(" N'" & IIf(IsDBNull(row.Item(j).ToString.Trim()), "", row.Item(j).ToString.Trim) & "'")
-                                End Select
-
-                            Next j
-
-
-                            .Append(", '" & C_Variable.USER_LOGIN & "'")
-                            .Append(", '" & C_Variable.USER_LOGIN & "'")
-                            .Append(", getdate()")
-                            .Append(", getdate()")
-                            .Append(")")
-                            row.Item("ImportStatus") = "OK"
-                        End With
-
-                        msg = tr.ExcuteTranMsg(Str_commad.ToString)
-                        If msg <> "" Then
-                            'If msg = String.Empty Then
-                            row.Item("ImportStatus") = "Error: " & msg
-
-
-                            Errcount = Errcount + 1
-                        Else
-                            row.Item("ImportStatus") = "OK"
-                        End If
-
-                    Catch ex As Exception
-
-                        MessageBox.Show("Incorrect Import format " & ex.Message.ToString, "", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-                        tr.Rollback()
-                        Cursor.Current = Cursors.Arrow
-                        Return False
-
-                    End Try
-
-                End If
-
-            Next
-
-            If Errcount > 0 Then
-
-                Try
-
-                    MessageBox.Show(Me, "Import Error, Some data can't import", "Fail.", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-                    'tr.Rollback()
-                    tr.CommitTran(True)
-                    Cursor.Current = Cursors.Arrow
-                    Return False
-
-                Catch ex As Exception
-
-                End Try
-            Else
-
-                tr.CommitTran(True)
-
-                MessageBox.Show(Me, "Import Success", "Success.", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             End If
 
-            SimpleButton4.Enabled = False
-        End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+        End Try
+
+    End Function
+
+    Private Function CheckDup(ByVal pProductCode As String) As String
+        Try
+
+            Dim StrSQL As New StringBuilder()
+            Dim dt As New DataTable
+
+            StrSQL.Append("select count(*) from Tbl_Master_Product where f_TGRT_Code ='" & pProductCode & "'")
+            dt = DatabaseConnection.OleDBConnect.Access.Read(StrSQL.ToString, css, False)
+
+            If dt Is Nothing Then
+                Return "ERROR"
+            End If
+
+            If Convert.ToInt32(dt.Rows(0)(0)) = 0 Then
+                Return "ADD"
+            Else
+                Return "EDIT"
+            End If
+
+        Catch ex As Exception
+            Return "ERROR"
+        End Try
+
+
     End Function
 
 
@@ -521,19 +406,11 @@ Public Class frmImport1
 
         If DGV.RowCount > 0 Then
 
-
-
             Dim tr As New DatabaseConnection.SQLConnect.Trans(cs)
 
             Dim Str_commad As New StringBuilder()
             PGB1.Properties.Maximum = DGV.RowCount
 
-
-
-            'Str_commad.Append("delete from [Tbl_Plan_" & pPlan & "] where [f_Status1]='1'")
-            'tr.ExcuteTran(Str_commad.ToString, False)
-            'Str_commad.Append("delete from [tbl_Status_Part__" & pPlan & "_DHL] where [f_Carrier_Part_Status]+[f_DiffCase_Part_Status]+[f_Gear_Part_Status]='111'")
-            'tr.ExcuteTran(Str_commad.ToString, False)
             Dim Arr_Duplicate_Count() As Integer
             ReDim Arr_Duplicate_Count(DGV.RowCount - 1)
             For i = 0 To DGV.RowCount - 1
@@ -541,26 +418,10 @@ Public Class frmImport1
                 Dim row As DataRowView = view.GetRow(i)
                 Dim Imp_Status As String
                 If Imp_Status <> "OK" Then
-                    'Dim aa As DateTime = CDate(row.Item(0).ToString.Trim()).ToString("yyyy/MM/dd ") & CDate(Format(row.Item(1).ToString.Trim("HH:mm:ss")))
                     Dim tmp_JOB_NO As String = (row.Item(3).ToString.Trim)
                     Dim tmp_PDT_LOT As String = (row.Item(4).ToString.Trim)
                     Dim tmp_PartCode As String = (row.Item(2).ToString.Trim)
                     Dim tmp_Qty_per_box As Integer = (row.Item(7).ToString.Trim)
-                    'Dim cc As DateTime
-                    'Dim dd As Integer
-
-
-                    'For j = 0 To DGV.RowCount - 1
-                    '    Dim row2 As DataRowView = view.GetRow(j)
-                    '    cc = CDate(row2.Item(0).ToString.Trim()).ToString("yyyy/MM/dd ") & CDate(Format(row2.Item(1).ToString.Trim("HH:mm:ss")))
-                    '    dd = CInt(row2.Item(2).ToString.Trim)
-
-                    '    If Check_Duplicate_Internal(aa, bb, cc, dd) = True Then
-
-                    '        Arr_Duplicate_Count(j) = Val(Arr_Duplicate_Count(j)) + 1
-
-                    '    End If
-                    'Next j
 
                     If Check_Duplicate_JOB_NO_AND_PRODUCTION_LOT(tmp_JOB_NO, tmp_PDT_LOT) = True Then
                         row.Item("ImportStatus") = "Duplicate Data [JOB NO],[PDT LOT]"
@@ -581,55 +442,9 @@ Public Class frmImport1
                         Errcount = Errcount + 1
                     End If
 
-
-
-
                 End If
 
             Next i
-
-            'For i = 0 To DGV.RowCount - 1
-            '    Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
-            '    Dim row As DataRowView = view.GetRow(i)
-            '    Dim row_2 As DataRowView = view.GetRow(i + 1)
-            '    Dim Imp_Status As String
-
-
-            '    Dim aa As DateTime = CDate(row.Item(0).ToString.Trim()).ToString("yyyy/MM/dd ") & CDate(Format(row.Item(1).ToString.Trim("HH:mm:ss")))
-            '    Dim bb As DateTime = CDate(row_2.Item(0).ToString.Trim()).ToString("yyyy/MM/dd ") & CDate(Format(row_2.Item(1).ToString.Trim("HH:mm:ss")))
-
-            '    Dim tmp_Qty As Integer = row.Item("quantity").ToString
-
-
-            '    If aa > bb Then
-            '        row.Item("ImportStatus") = "Not sorted datetime"
-            '        Imp_Status = "Not sorted datetime"
-
-            '    End If
-
-            '    If tmp_Qty > 10 Then
-            '        row.Item("ImportStatus") = row.Item("ImportStatus") & ", QTY OVER 10"
-            '        Imp_Status = Imp_Status & ", QTY OVER 10"
-            '    End If
-            '    If Imp_Status <> "" Then
-            '        Errcount = Errcount + 1
-            '    End If
-
-
-            'Next i
-
-
-
-
-            'For i = 0 To DGV.RowCount - 1
-            '    If Arr_Duplicate_Count(i) > 1 Then
-            '        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
-            '        Dim row As DataRowView = view.GetRow(i)
-            '        row.Item("ImportStatus") = "Duplicate Data [JOB NO],[PDT LOT]"
-            '        Errcount = Errcount + 1
-            '    End If
-            'Next
-
 
             For i = 0 To DGV.RowCount - 1
                 Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
@@ -640,31 +455,13 @@ Public Class frmImport1
                 PGB1.EditValue = i + 1
                 Application.DoEvents()
                 Dim PartType As String = ""
-
-                'If ComboBox1.Text = "FinishedGoods" Then
-                '    PartType = "FG"
-                'ElseIf ComboBox1.Text = "RawMaterial" Then
-                '    PartType = "RM"
-                'Else
-                '    PartType = ""
-                'End If
-
-
                 Dim Imp_Status As String
-
-
-
 
                 Try
                     Imp_Status = row.Item("ImportStatus").ToString.Trim
                 Catch ex As Exception
                     Imp_Status = ""
                 End Try
-
-
-
-
-
 
                 If Imp_Status = "OK" Then
 
@@ -676,9 +473,7 @@ Public Class frmImport1
 
                 Else
 
-
                     Try
-
 
                         With Str_commad
 
@@ -712,20 +507,6 @@ Public Class frmImport1
                             'f_Plan_Date
                             .Append(" ,getdate()")
 
-                            'Dim column1 As DataColumn = New DataColumn("Customer Code")
-                            'Dim column2 As DataColumn = New DataColumn("PO NO.")
-                            'Dim column3 As DataColumn = New DataColumn("Part No")
-                            'Dim column4 As DataColumn = New DataColumn("Job No")
-                            'Dim column5 As DataColumn = New DataColumn("Product Lot")
-                            'Dim column6 As DataColumn = New DataColumn("Qty Order")
-                            'Dim column7 As DataColumn = New DataColumn("Qty box of Order")
-                            'Dim column8 As DataColumn = New DataColumn("First No box")
-                            'Dim column9 As DataColumn = New DataColumn("Last No box")
-                            'Dim column10 As DataColumn = New DataColumn("Satetystock(%)")
-                            'Dim column11 As DataColumn = New DataColumn("Machine size(ton)")
-                            'Dim column12 As DataColumn = New DataColumn("Material Code")
-                            'Dim column13 As DataColumn = New DataColumn("Mat'l mix(%)")
-                            'f_Customer_Code
                             .Append(", N'" & IIf(IsDBNull(row.Item(0).ToString.Trim()), "", row.Item(0).ToString.Trim) & "'")
                             'f_Part_No
                             .Append(", N'" & IIf(IsDBNull(row.Item(2).ToString.Trim()), "", row.Item(2).ToString.Trim) & "'")
@@ -852,7 +633,7 @@ Public Class frmImport1
 
             End If
 
-            SimpleButton4.Enabled = False
+            btn_import.Enabled = False
             ' GridControl1.DataSource = Nothing
 
 
