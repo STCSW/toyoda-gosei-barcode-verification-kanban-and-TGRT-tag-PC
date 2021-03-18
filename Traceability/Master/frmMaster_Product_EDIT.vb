@@ -42,7 +42,7 @@ Public Class frmMaster_Product_EDIT
 
 
     Private Sub txt_GotFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTGRT_Code.GotFocus,
-        txtTGRT_Barcode.GotFocus, txtLocation.GotFocus, txtPartNo.GotFocus, txtCustomer_Barcode.GotFocus, txtPartname.GotFocus
+        txtTGRT_Barcode.GotFocus, txtPartNo.GotFocus, txtCustomer_Barcode.GotFocus, txtPartname.GotFocus
 
         Dim objTxt As TextBox = CType(sender, TextBox)
         objTxt.BackColor = Color.MediumSpringGreen
@@ -50,7 +50,7 @@ Public Class frmMaster_Product_EDIT
     End Sub
 
     Private Sub txt_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTGRT_Code.LostFocus,
-      txtTGRT_Barcode.LostFocus, txtLocation.LostFocus, txtPartNo.LostFocus, txtCustomer_Barcode.LostFocus, txtPartname.LostFocus
+      txtTGRT_Barcode.LostFocus, txtPartNo.LostFocus, txtCustomer_Barcode.LostFocus, txtPartname.LostFocus
 
         Dim objTxt As TextBox = CType(sender, TextBox)
         objTxt.BackColor = SystemColors.Window
@@ -64,13 +64,6 @@ Public Class frmMaster_Product_EDIT
         txtCustomer_Barcode.Text = str(2)
         txtPartname.Text = str(3)
         txtPartNo.Text = str(4)
-        txtLocation.Text = str(5)
-        txtCutDigit.Text = str(6)
-
-
-
-
-
 
     End Sub
 
@@ -81,8 +74,6 @@ Public Class frmMaster_Product_EDIT
         txtCustomer_Barcode.Text = String.Empty
         txtPartname.Text = String.Empty
         txtPartNo.Text = String.Empty
-        txtLocation.Text = String.Empty
-        txtCutDigit.Text = String.Empty
 
         'PART_PIC.Image = Nothing
         CheckCreate = True
@@ -101,10 +92,8 @@ Public Class frmMaster_Product_EDIT
             End If
             txtTGRT_Barcode.Enabled = True
             txtPartNo.Enabled = True
-            txtLocation.Enabled = True
             txtCustomer_Barcode.Enabled = True
             txtPartname.Enabled = True
-            txtCutDigit.Enabled = True
 
 
 
@@ -114,11 +103,9 @@ Public Class frmMaster_Product_EDIT
 
 
             txtPartNo.Enabled = False
-            txtLocation.Enabled = False
             txtCustomer_Barcode.Enabled = False
 
             txtPartname.Enabled = False
-            txtCutDigit.Enabled = False
 
 
 
@@ -140,14 +127,16 @@ Public Class frmMaster_Product_EDIT
             Dim StrSQL As New StringBuilder()
 
 
-            StrSQL.Append("select  [f_TGRT_Code]")
+            StrSQL.Append("select Count(*)")
 
             StrSQL.Append(" from [tbl_Master_Product]")
             StrSQL.Append(" WHERE [f_TGRT_Code]='" & txtTGRT_Code.Text & "'")
             dt = SQLConnect._SQL.Read(StrSQL.ToString)
+            dt = DatabaseConnection.OleDBConnect.Access.Read(StrSQL.ToString, css, False)
+
             If Not dt Is Nothing Then
-                If dt.Rows.Count > 0 Then
-                    MessageBox.Show("TGRT Code Already Exists", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+                If Convert.ToInt32(dt.Rows(0)(0)) > 0 Then
+                    MessageBox.Show("TGRT Code Already Exists", "Warning", MessageBoxButtons.OK, MessageBoxIcon.[Error])
                     txtTGRT_Code.Text = ""
                     txtTGRT_Code.Focus()
                     Exit Sub
@@ -160,8 +149,6 @@ Public Class frmMaster_Product_EDIT
                      " ,[f_Customer_Barcode]" &
                       " ,[f_Part_Name]" &
                        " ,[f_Part_No]" &
-                      " ,[f_Location]" &
-                      ",[f_Cut_Digit_Length]" &
                       " ,[f_User_Edit]" &
                      " ,[f_Edit_TimeStamp]" &
                      " )")
@@ -170,52 +157,17 @@ Public Class frmMaster_Product_EDIT
                      " ,'" & txtCustomer_Barcode.Text & "'" &
                       " ,'" & txtPartname.Text & "'" &
                         " ,'" & txtPartNo.Text & "'" &
-                      " ,'" & txtLocation.Text & "'" &
-                      " ,'" & txtCutDigit.Text & "'" &
                          " ,'" & C_Variable.USER_LOGIN & "'" &
                      " ,getdate())")
-            SQLConnect._SQL.Execute(StrSQL.ToString)
+            'SQLConnect._SQL.Execute(StrSQL.ToString)
+            Dim resExecute As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
 
+            If resExecute = True Then
+                MessageBox.Show("Successfully Registered", "Machine code", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("Connot Register", "Machine code", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
 
-            'StrSQL.Remove(0, StrSQL.Length)
-            'If PathImportPIC <> String.Empty And Not PART_PIC.Image Is Nothing Then
-            '    StrSQL.Append("INSERT INTO [dbo].[Tbl_Carrier_Join]([Photo1]) VALUES (@img)")
-            'Else
-            '    StrSQL.Append("INSERT INTO [dbo].[Tbl_Carrier_Join]([Photo1]) VALUES (null)")
-            'End If
-
-
-            'con = New SqlConnection(cs)
-            'con.Open()
-            'cmd = New SqlCommand(StrSQL.ToString)
-            'cmd.Connection = con
-
-            'If PathImportPIC <> String.Empty And Not PART_PIC.Image Is Nothing Then
-
-            '    Dim fsImage As Byte()
-            '    Dim b() As Byte
-            '    Dim mem As New IO.MemoryStream
-            '    PART_PIC.Image.Save(mem, Imaging.ImageFormat.Jpeg)
-            '    b = mem.GetBuffer
-
-            '    fsImage = b
-            '    '  img.Value = fsImage
-            '    'cmd.Parameters.AddWithValue("@Img", fsImage)
-
-            '    Dim Imgs As New SqlParameter("@Img", SqlDbType.Image)
-            '    Imgs.Value = fsImage
-            '    cmd.Parameters.Add(Imgs)
-
-            'End If
-
-
-            'cmd.ExecuteReader()
-            'con.Close()
-
-
-
-
-            MessageBox.Show("Successfully Registered", "Machine code", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             Reset()
         Catch ex As Exception
@@ -229,58 +181,23 @@ Public Class frmMaster_Product_EDIT
 
             Dim StrSQL As New StringBuilder()
 
+            StrSQL.Append("update tbl_Master_PRODUCT set")
+            StrSQL.Append(" [f_TGRT_Barcode] = '" & txtTGRT_Barcode.Text.Trim & "'")
+            StrSQL.Append(",[f_Customer_Barcode] = '" & txtCustomer_Barcode.Text.Trim & "'")
+            StrSQL.Append(",[f_Part_Name] = '" & txtPartname.Text.Trim & "'")
+            StrSQL.Append(",[f_Part_No] = '" & txtPartNo.Text.Trim & "'")
+            StrSQL.Append(",[f_User_Edit] = '" & C_Variable.USER_LOGIN & "'")
+            StrSQL.Append(",[f_Edit_TimeStamp] = Now()")
+            StrSQL.Append(" Where [f_TGRT_Code] = '" & txtTGRT_Code.Text.Trim & "'")
 
-            StrSQL.Append("update [tbl_Master_PRODUCT] set [f_TGRT_Code]=N'" & txtTGRT_Code.Text & "'" &
-                     " ,[f_TGRT_Barcode]=N'" & txtTGRT_Barcode.Text & "'" &
-                    " ,[f_Customer_Barcode]=N'" & txtCustomer_Barcode.Text & "'" &
-                     " ,[f_Part_No]=N'" & txtPartNo.Text & "'" &
-                    " ,[f_Location]=N'" & txtLocation.Text & "'" &
-                      ",f_Cut_Digit_Length=N'" & txtCutDigit.Text & "'" &
-                      " ,[f_User_Edit]=N'" & C_Variable.USER_LOGIN & "'" &
-                     " ,[f_Edit_TimeStamp]=getdate()")
+            Dim res As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, True)
 
-            StrSQL.Append(" Where [f_TGRT_Code]='" & txtTGRT_Code.Text & "'")
-
-            SQLConnect._SQL.Execute(StrSQL.ToString)
-
-            'StrSQL.Remove(0, StrSQL.Length)
-            'If PathImportPIC <> String.Empty And Not PART_PIC.Image Is Nothing Then
-            '    StrSQL.Append("update [dbo].[Tbl_Carrier_Join] set [Photo1]=@img ")
-            '    StrSQL.Append(" Where [ID]='" & txtPhotoID.Text & "'")
-            'End If
-
-
-            'con = New SqlConnection(cs)
-            'con.Open()
-            'cmd = New SqlCommand(StrSQL.ToString)
-            'cmd.Connection = con
-
-            'If PathImportPIC <> String.Empty And Not PART_PIC.Image Is Nothing Then
-
-            '    Dim fsImage As Byte()
-            '    Dim b() As Byte
-            '    Dim mem As New IO.MemoryStream
-            '    PART_PIC.Image.Save(mem, Imaging.ImageFormat.Jpeg)
-            '    b = mem.GetBuffer
-
-            '    fsImage = b
-            '    '  img.Value = fsImage
-            '    'cmd.Parameters.AddWithValue("@Img", fsImage)
-
-            '    Dim Imgs As New SqlParameter("@Img", SqlDbType.Image)
-            '    Imgs.Value = fsImage
-            '    cmd.Parameters.Add(Imgs)
-            '    cmd.ExecuteReader()
-            '    con.Close()
-            'End If
-
-
-
-
-
-
-            Reset()
-            MessageBox.Show("Successfully updated", "PRODUCT Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            If res = True Then
+                Reset()
+                MessageBox.Show("Successfully updated", "PRODUCT Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("Cannot updated", "PRODUCT Info", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
 
             Call Enable_txt(False)
             btnSave.Enabled = False

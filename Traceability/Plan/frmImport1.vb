@@ -288,78 +288,47 @@ Public Class frmImport1
             PGB1.Properties.Maximum = DGV.RowCount
             If DGV.RowCount > 0 Then
 
+                If Delete_Item() = False Then
+
+                    MessageBox.Show("Cannot delete item", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+                    Exit Function
+
+                End If
+
+                Dim View As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
+                Dim row As DataRowView
+
                 For index = 1 To DGV.RowCount - 1
                     PGB1.Text = index
                     Application.DoEvents()
-                    Dim View As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
-                    Dim row As DataRowView = View.GetRow(index)
-                    Dim tmp_ProductCode As String = (row.Item(1).ToString.Trim)
 
-                    Dim resCheckDup As String = CheckDup(tmp_ProductCode)
+                    row = View.GetRow(index)
 
-                    If resCheckDup = "ADD" Then
+                    Dim StrSQL As New StringBuilder()
 
-                        Dim StrSQL As New StringBuilder()
-
-                        StrSQL.Append("Insert into Tbl_Master_Product(")
-                        StrSQL.Append("f_TGRT_Code")
-                        StrSQL.Append(",f_TGRT_Barcode")
-                        StrSQL.Append(",f_Customer_Barcode")
-                        StrSQL.Append(",f_Part_Name")
-                        StrSQL.Append(",f_Part_No")
-                        StrSQL.Append(",f_Location")
-                        StrSQL.Append(",f_User_Import")
-                        StrSQL.Append(",f_User_Edit")
-                        StrSQL.Append(",f_Import_TimeStamp")
-                        StrSQL.Append(",f_Edit_TimeStamp")
-                        StrSQL.Append(",f_Cut_Digit_Length")
-                        StrSQL.Append(")")
-                        StrSQL.Append("Values(")
-                        StrSQL.Append("'" & row.Item(1).ToString.Trim & "'")
-                        StrSQL.Append(",'" & row.Item(2).ToString.Trim & "'")
-                        StrSQL.Append(",'" & row.Item(3).ToString.Trim & "'")
-                        StrSQL.Append(",'" & row.Item(4).ToString.Trim & "'")
-                        StrSQL.Append(",'" & row.Item(5).ToString.Trim & "'")
-                        StrSQL.Append(",'" & row.Item(6).ToString.Trim & "'")
-                        StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
-                        StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
-                        StrSQL.Append(", Now() ")
-                        StrSQL.Append(", Now() ")
-                        StrSQL.Append(",'0'")
-                        StrSQL.Append(")")
-                        DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
-
-                    ElseIf resCheckDup = "EDIT" Then
-
-                        Dim StrSQL As New StringBuilder()
-
-                        StrSQL.Append("Update Tbl_Master_Product Set")
-                        StrSQL.Append(" f_TGRT_Barcode =")
-                        StrSQL.Append(" '" & row.Item(2).ToString.Trim & "'")
-                        StrSQL.Append(",f_Customer_Barcode =")
-                        StrSQL.Append(" '" & row.Item(3).ToString.Trim & "'")
-                        StrSQL.Append(",f_Part_Name =")
-                        StrSQL.Append(" '" & row.Item(4).ToString.Trim & "'")
-                        StrSQL.Append(",f_Part_No =")
-                        StrSQL.Append(" '" & row.Item(5).ToString.Trim & "'")
-                        StrSQL.Append(",f_Location =")
-                        StrSQL.Append(" '" & row.Item(6).ToString.Trim & "'")
-                        StrSQL.Append(",f_User_Import =")
-                        StrSQL.Append(" '" & C_Variable.USER_LOGIN & "'")
-                        StrSQL.Append(",f_User_Edit =")
-                        StrSQL.Append(" '" & C_Variable.USER_LOGIN & "'")
-                        StrSQL.Append(",f_Edit_TimeStamp =")
-                        StrSQL.Append(" Now() ")
-                        StrSQL.Append(" Where f_TGRT_Code =")
-                        StrSQL.Append("'" & row.Item(1).ToString.Trim & "'")
-
-                        DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
-
-                    Else
-                        'ERROR
-                        MessageBox.Show("Cannot get data from database", "Error", MessageBoxButtons.OK, MessageBoxIcon.[Error])
-                        Exit For
-                    End If
+                    StrSQL.Append("Insert into Tbl_Master_Product(")
+                    StrSQL.Append("f_TGRT_Code")
+                    StrSQL.Append(",f_TGRT_Barcode")
+                    StrSQL.Append(",f_Customer_Barcode")
+                    StrSQL.Append(",f_Part_Name")
+                    StrSQL.Append(",f_Part_No")
+                    StrSQL.Append(",f_User_Import")
+                    StrSQL.Append(",f_User_Edit")
+                    StrSQL.Append(",f_Import_TimeStamp")
+                    StrSQL.Append(",f_Edit_TimeStamp")
+                    StrSQL.Append(")")
+                    StrSQL.Append("Values(")
+                    StrSQL.Append("'" & Row.Item(1).ToString.Trim & "'")
+                    StrSQL.Append(",'" & Row.Item(2).ToString.Trim & "'")
+                    StrSQL.Append(",'" & Row.Item(3).ToString.Trim & "'")
+                    StrSQL.Append(",'" & Row.Item(4).ToString.Trim & "'")
+                    StrSQL.Append(",'" & Row.Item(5).ToString.Trim & "'")
+                    StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
+                    StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
+                    StrSQL.Append(", Now() ")
+                    StrSQL.Append(", Now() ")
+                    StrSQL.Append(")")
+                    DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
 
                 Next
                 PGB1.Text = 0
@@ -373,29 +342,22 @@ Public Class frmImport1
 
     End Function
 
-    Private Function CheckDup(ByVal pProductCode As String) As String
+    Private Function Delete_Item() As Boolean
         Try
 
             Dim StrSQL As New StringBuilder()
-            Dim dt As New DataTable
 
-            StrSQL.Append("select count(*) from Tbl_Master_Product where f_TGRT_Code ='" & pProductCode & "'")
-            dt = DatabaseConnection.OleDBConnect.Access.Read(StrSQL.ToString, css, False)
-
-            If dt Is Nothing Then
-                Return "ERROR"
-            End If
-
-            If Convert.ToInt32(dt.Rows(0)(0)) = 0 Then
-                Return "ADD"
+            StrSQL.Append("Delete From Tbl_Master_Product'")
+            Dim res As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, True)
+            If res = True Then
+                Return True
             Else
-                Return "EDIT"
+                Return False
             End If
 
         Catch ex As Exception
-            Return "ERROR"
+            Return False
         End Try
-
 
     End Function
 
