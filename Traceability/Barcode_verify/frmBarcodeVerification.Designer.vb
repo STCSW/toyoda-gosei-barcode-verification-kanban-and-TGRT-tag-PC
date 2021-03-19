@@ -45,8 +45,6 @@ Partial Class frmBarcodeVerification
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.lblLocation = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.lblPartNo = New System.Windows.Forms.Label()
         Me.lblTGRT_Code = New System.Windows.Forms.Label()
         Me.lblPartName = New System.Windows.Forms.Label()
@@ -265,8 +263,6 @@ Partial Class frmBarcodeVerification
         Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.lblLocation)
-        Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.lblPartNo)
         Me.GroupBox1.Controls.Add(Me.lblTGRT_Code)
         Me.GroupBox1.Controls.Add(Me.lblPartName)
@@ -342,28 +338,6 @@ Partial Class frmBarcodeVerification
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "PART NO. :"
         '
-        'lblLocation
-        '
-        Me.lblLocation.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.lblLocation.AutoSize = True
-        Me.lblLocation.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblLocation.Location = New System.Drawing.Point(426, 69)
-        Me.lblLocation.Name = "lblLocation"
-        Me.lblLocation.Size = New System.Drawing.Size(33, 20)
-        Me.lblLocation.TabIndex = 15
-        Me.lblLocation.Text = "......"
-        '
-        'Label7
-        '
-        Me.Label7.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label7.Location = New System.Drawing.Point(323, 69)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(97, 20)
-        Me.Label7.TabIndex = 10
-        Me.Label7.Text = "LOCATION :"
-        '
         'lblPartNo
         '
         Me.lblPartNo.Anchor = System.Windows.Forms.AnchorStyles.None
@@ -422,7 +396,7 @@ Partial Class frmBarcodeVerification
         '
         Me.txtScan2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.txtScan2.Location = New System.Drawing.Point(127, 58)
-        Me.txtScan2.MaxLength = 10
+        Me.txtScan2.MaxLength = 0
         Me.txtScan2.Name = "txtScan2"
         Me.txtScan2.Size = New System.Drawing.Size(199, 26)
         Me.txtScan2.TabIndex = 1
@@ -489,8 +463,6 @@ Partial Class frmBarcodeVerification
     Friend WithEvents Label9 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents lblLocation As Label
-    Friend WithEvents Label7 As Label
     Friend WithEvents lblPartNo As Label
     Friend WithEvents lblTGRT_Code As Label
     Friend WithEvents lblPartName As Label

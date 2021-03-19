@@ -67,366 +67,6 @@ Public Class frm_User_Master
 
 #End Region
 
-    '#Region "Function"
-    '    Private Sub ClearFrm()
-
-    '        txtUserID.Text = ""
-    '        txtPassword.Text = ""
-    '        txtName.Text = ""
-    '        cbDepartment.Text = ""
-    '        cbUserType.Text = ""
-    '        ToggleSwitch1.EditValue = True
-    '        CB_DEPARTMENT_Run()
-    '        CB_USERTYPE_Run()
-    '    End Sub
-
-    '    Private Sub BTControl(ByVal BTName As String)
-
-    '        NewBT.Enabled = False
-    '        SaveBT.Enabled = False
-    '        DelBT.Enabled = False
-
-    '        Select Case BTName
-
-    '            Case "NewBT"
-    '                SaveBT.Enabled = True
-    '                NewBT.Enabled = True
-    '            Case "SaveBT"
-    '                NewBT.Enabled = True
-    '                SaveBT.Enabled = True
-    '            Case "DelBT"
-    '                SaveBT.Enabled = True
-    '                NewBT.Enabled = True
-    '            Case "FoundData"
-    '                NewBT.Enabled = True
-    '                SaveBT.Enabled = True
-    '                DelBT.Enabled = True
-    '        End Select
-
-
-
-    '    End Sub
-
-    '    Private Sub UserGridData()
-
-    '        Cursor.Current = Cursors.WaitCursor
-
-    '        If C_Variable.Permission_Admin = True Then
-    '            sql = "select * from M_USER_MASTER_ALL"
-    '        Else
-    '            sql = "select * from M_USER_MASTER"
-    '        End If
-
-
-    '        Dim dt As DataTable = Read(sql, cs)
-
-    '        If dt IsNot Nothing Then
-
-    '            GridControl1.DataSource = dt
-    '            DGV.Columns("Def_Password").Visible = False
-    '            'DGV.Appearance.Row.Font = Gridfont()
-    '            'DGV.Appearance.HeaderPanel.Font = GridHeaderfont()
-    '            If DGV.RowCount <= 5000 Then
-    '                DGV.BestFitColumns()
-    '            End If
-
-    '        End If
-
-    '        Cursor.Current = Cursors.Arrow
-    '    End Sub
-
-    '    Private Function UpdateData(ByVal fnType As String) As Boolean
-
-
-    '        If txtUserID.Text.Trim = "" Then
-
-    '            RESULTSTR = " Please Insert USER ID. "
-
-    '            Return False
-    '            Exit Function
-    '        End If
-
-
-    '        If txtPassword.Text.Trim = "" Then
-
-    '            RESULTSTR = " Please Insert Password. "
-    '            Return False
-    '            Exit Function
-    '        End If
-
-
-    '        If txtName.Text.Trim = "" Then
-
-    '            RESULTSTR = " Please Insert Name. "
-
-
-
-    '            Return False
-    '            Exit Function
-    '        End If
-
-    '        If cbUserType.Text.Trim = "" Then
-
-    '            RESULTSTR = " Please Select User Type. "
-
-
-    '            Return False
-    '            Exit Function
-    '        End If
-
-    '        Dim LockVal As Integer = 0
-    '        If ToggleSwitch1.EditValue = True Then
-    '            LockVal = 1
-    '        Else
-    '            LockVal = 0
-
-    '        End If
-
-    '        Select Case fnType
-    '            Case "Add"
-    '                sql = "insert into M_USEMAS(UserID,Password,Name,Department,UserGroup,Status) " _
-    '                    & " values(N'" & txtUserID.Text.Trim & "',N'" & txtPassword.Text.Trim & "',N'" & txtName.Text.Trim & "',N'" & cbDepartment.Text.Trim & "',N'" & cbUserType.Text.Trim & "'," & LockVal & ")"
-
-    '                If Execute(sql, cs, True) = False Then
-    '                    Return False
-    '                End If
-    '            Case "Edit"
-    '                sql = "update M_USEMAS set Password = N'" & txtPassword.Text.Trim & "',Name = N'" & txtName.Text.Trim & "',Department = N'" & cbDepartment.Text.Trim & "',UserGroup  = N'" & cbUserType.Text.Trim & "',Status = " & LockVal & "" _
-    '                    & " Where UserID = N'" & txtUserID.Text.Trim & "'"
-    '                If Execute(sql, cs, True) = False Then
-    '                    Return False
-    '                End If
-
-    '            Case "Del"
-    '                sql = "delete from M_USEMAS where UserID = N'" & txtUserID.Text.Trim & "'"
-    '                If Execute(sql, cs, True) = False Then
-    '                    Return False
-    '                End If
-
-
-    '        End Select
-
-    '        Return True
-    '    End Function
-
-    '    Private Sub CB_USERTYPE_Run()
-
-    '        cbUserType.Properties.Items.Clear()
-
-
-    '        sql = "select TYPE_NAME from M_USETYP order by TYPE_NAME"
-    '        Dim dt As DataTable = Read(sql, cs)
-
-    '        If dt IsNot Nothing Then
-    '            For i = 0 To dt.Rows.Count - 1
-    '                cbUserType.Properties.Items.Add(dt.Rows(i).Item(0).ToString.Trim)
-
-    '            Next
-
-    '        End If
-    '        cbUserType.Text = ""
-    '        cbUserType.EditValue = ""
-
-
-    '    End Sub
-
-    '    Private Sub CB_DEPARTMENT_Run()
-
-    '        cbDepartment.Properties.Items.Clear()
-
-
-    '        sql = "select Department from M_USEMAS group by Department order by Department"
-    '        Dim dt As DataTable = Read(sql, cs)
-
-    '        If dt IsNot Nothing Then
-    '            For i = 0 To dt.Rows.Count - 1
-    '                cbDepartment.Properties.Items.Add(dt.Rows(i).Item(0).ToString.Trim)
-
-    '            Next
-
-    '        End If
-    '        cbDepartment.Text = ""
-    '        cbDepartment.EditValue = ""
-
-
-    '    End Sub
-
-    '#End Region
-
-    '    Private Sub frm_User_Master_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
-    '        Button1.Enabled = C_Variable.Permission_Admin
-
-    '        CB_USERTYPE_Run()
-    '        CB_DEPARTMENT_Run()
-    '        UserGridData()
-
-
-    '    End Sub
-
-    '    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-    '        If C_Variable.Permission_Admin = False Then
-    '            MessageBox.Show("You don't have permission to access this function.", "User Type", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-    '            Exit Sub
-    '        End If
-
-    '    End Sub
-
-    '    Private Sub Button1_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Button1.MouseDown
-    '        If C_Variable.Permission_Admin = False Then
-    '            MessageBox.Show("You don't have permission to access this function.", "User Type", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-    '            Exit Sub
-    '        End If
-
-    '        txtPassword.Properties.PasswordChar = ""
-    '    End Sub
-
-    '    Private Sub Button1_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Button1.MouseUp
-    '        txtPassword.Properties.PasswordChar = "*"
-    '    End Sub
-
-    '    Private Sub NewBT_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles NewBT.ItemClick
-    '        ClearFrm()
-    '        BTControl("NewBT")
-    '        cbUserType.Text = "User"
-    '        ToggleSwitch1.EditValue = True
-    '        txtUserID.Properties.ReadOnly = False
-    '        txtName.Focus()
-    '    End Sub
-
-    '    Private Sub SaveBT_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles SaveBT.ItemClick
-    '        'C_Variable.log()
-    '        'C_Variable.USER_Type
-    '        'If F_Check_User_Authen("Admin") = False Then Exit Sub
-
-
-    '        If txtUserID.Text = "" Then
-    '            MessageBox.Show(" Please Insert User ID. ", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '            txtUserID.Focus()
-
-    '            Exit Sub
-    '        End If
-
-
-    '        Dim Res As Boolean = False
-    '        'If txtUserID.Properties.ReadOnly = False Then
-    '        '    If F_Check_User_Authen("Add") = False Then Exit Sub
-    '        '    Res = UpdateData("Add")
-    '        'Else
-    '        '    If F_Check_User_Authen("Edit") = False Then Exit Sub
-    '        '    Res = UpdateData("Edit")
-    '        'End If
-
-
-    '        If Res = True Then
-    '            NewBT.PerformClick()
-    '            'BTControl("AddBT")
-    '            'ClearFrm()
-    '            UserGridData()
-    '            txtUserID.Properties.ReadOnly = False
-    '            MessageBox.Show("Save data complete.", "Save Data", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    '        Else
-
-    '            MessageBox.Show(" " & RESULTSTR & " Please Try again!!", "Save Data", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-
-    '            Exit Sub
-
-    '        End If
-    '    End Sub
-
-    '    Private Sub DelBT_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles DelBT.ItemClick
-
-
-
-
-
-    '        If C_Variable.USER_LOGIN = txtUserID.Text.Trim Then
-
-    '            MessageBox.Show("Cannot Delete.This User Is Logon", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-
-    '            Exit Sub
-    '        End If
-
-    '        ' If F_Check_User_Authen("Del") = False Then Exit Sub
-
-    '        '  If MessageBox.Show("Do you want To Delete?", "Delete Data", MessageBoxButtons.YesNo, MessageBoxIcon.Question) <> MessageBox.ShowBoxResult.Yes Then Exit Sub
-    '        Dim strprompt As String = "Do you want To Delete?"
-    '        If MsgBox(strprompt, MsgBoxStyle.Question + MsgBoxStyle.YesNo) = MsgBoxResult.No Then
-    '            Exit Sub
-
-    '        End If
-
-    '        If UpdateData("Del") = True Then
-    '            BTControl("DelBT")
-    '            UserGridData()
-    '            ClearFrm()
-    '        Else
-
-    '            MessageBox.Show("There is something wrong data. Cannot be saved. Please Try again!!", "Add Data", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-    '        End If
-
-    '    End Sub
-
-    '    Private Sub GridControl1_Click(sender As System.Object, e As System.EventArgs) Handles GridControl1.Click
-    '        Dim view As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
-    '        Dim row As DataRowView = view.GetRow(view.FocusedRowHandle)
-
-    '        Try
-
-    '            If row.Item("UserID").ToString <> "" Then
-
-    '                txtName.Text = row.Item("Name").ToString
-    '                txtUserID.Text = row.Item("UserID").ToString
-    '                txtPassword.Text = row.Item("Def_Password").ToString
-    '                cbUserType.Text = row.Item("UserGroup").ToString
-    '                cbDepartment.Text = row.Item("Department").ToString
-
-    '                If row.Item("Status").ToString = "1" Then
-    '                    ToggleSwitch1.EditValue = True
-
-    '                Else
-    '                    ToggleSwitch1.EditValue = False
-    '                End If
-
-
-    '                txtUserID.Properties.ReadOnly = True
-
-
-    '                BTControl("FoundData")
-
-
-    '            End If
-    '        Catch ex As Exception
-
-    '        End Try
-    '    End Sub
-
-    '    Private Sub bt_exExcel_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles bt_exExcel.ItemClick
-    '        '  Export_Excel_from_DataGridExView(DGV)
-    '        GridControl1.ExportToXls("EXPORT")
-    '    End Sub
-
-    '    Private Sub BarButtonItem4_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem4.ItemClick
-
-    '        ' If F_Check_User_Authen("Admin") = False Then Exit Sub
-
-
-    '        Dim _frm As New tls_UserType
-    '        _frm.ShowDialog()
-
-    '        CB_USERTYPE_Run()
-    '        UserGridData()
-    '    End Sub
-
-    '    Private Sub BarButtonItem5_ItemClick(sender As System.Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles BarButtonItem5.ItemClick
-    '        UserGridData()
-    '    End Sub
-
-    '    Private Sub ToggleSwitch1_Toggled(sender As System.Object, e As System.EventArgs) Handles ToggleSwitch1.Toggled
-
-    '    End Sub
-
     Private Sub frm_User_Master_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call Getdata_LIST_TYPE_NAME()
         Call getdata()
@@ -446,9 +86,7 @@ Public Class frm_User_Master
             StrSQL.Append(",[UserID] ")
             StrSQL.Append(",[Password] ")
             StrSQL.Append(",[RegisterDate] ")
-            '  StrSQL.Append(",[Department] ")
             StrSQL.Append(",[Status] ")
-            ' StrSQL.Append(", [Line_Operattion] as 'Line Operattion'")
             StrSQL.Append(" FROM")
             StrSQL.Append(" tbUser")
             StrSQL.Append(" ORDER BY [RegisterDate] DESC")
@@ -548,11 +186,6 @@ Public Class frm_User_Master
                 CLS_ALERT_UI.AlertInformation("Warning : Data not complete, Please complete your data then save again. ", Color.DarkOrange, Color.White, Me.Width, 200, True, Me.Height / 2)
                 Exit Sub
             End If
-            'If txtline.Text = String.Empty Then
-
-            '    CLS_ALERT_UI.AlertInformation("Warning : Data not complete, Please complete your data then save again. ", Color.DarkOrange, Color.White, Me.Width, 200, True, Me.Height / 2)
-            '    Exit Sub
-            'End If
 
             Dim LockVal As Integer = 0
             If ToggleSwitch1.EditValue = True Then
@@ -571,8 +204,12 @@ Public Class frm_User_Master
                 StrSQL.Append(" [Status] ='" & LockVal & "' ")
                 StrSQL.Append(" WHERE [UserID] = '" & txtUserID.Text & "' ")
 
-                DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, True)
-                CLS_ALERT_UI.AlertInformation("Save Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
+                Dim res As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, True)
+                If res = True Then
+                    CLS_ALERT_UI.AlertInformation("Save Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
+                Else
+                    CLS_ALERT_UI.AlertInformation("Cannot edit user", Color.Red, Color.White, Me.Width, 200, True, Me.Height / 2)
+                End If
 
                 Call getdata()
             End If
@@ -666,10 +303,6 @@ Public Class frm_User_Master
 
     Private Sub DelBT_ItemClick(sender As Object, e As DevExpress.XtraBars.ItemClickEventArgs) Handles DelBT.ItemClick
         If txtUserID.Text.Length = 0 Then Exit Sub
-        'If DGV.SelectedRowsCount > 1 Then
-        '    CLS_ALERT_UI.AlertInformation("Warning : You Can select one item for Delete", Color.DarkOrange, Color.White, Me.Width, 200, True, Me.Height / 2)
-        '    Exit Sub
-        'End If
 
         Try
             If txtUserID.Text = C_Variable.USER_LOGIN Then
@@ -682,8 +315,14 @@ Public Class frm_User_Master
                 StrSQL.Append(" DELETE FROM tbUser ")
                 StrSQL.Append(" WHERE UserID ='" & txtUserID.Text & "' ")
 
-                DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
-                CLS_ALERT_UI.AlertInformation("Delete Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
+                Dim res As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
+
+                If res = True Then
+                    CLS_ALERT_UI.AlertInformation("Delete Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
+                Else
+                    CLS_ALERT_UI.AlertInformation("Cannot delete user", Color.Red, Color.White, Me.Width, 200, True, Me.Height / 2)
+                End If
+
             End If
             Call getdata()
         Catch ex As Exception

@@ -194,9 +194,9 @@ Public Class frmMaster_Product_EDIT
 
             If res = True Then
                 Reset()
-                MessageBox.Show("Successfully updated", "PRODUCT Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                CLS_ALERT_UI.AlertInformation("Information : Successfully updated", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
             Else
-                MessageBox.Show("Cannot updated", "PRODUCT Info", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                CLS_ALERT_UI.AlertInformation("Warning : Cannot update product", Color.DarkOrange, Color.White, Me.Width, 200, True, Me.Height / 2)
             End If
 
             Call Enable_txt(False)

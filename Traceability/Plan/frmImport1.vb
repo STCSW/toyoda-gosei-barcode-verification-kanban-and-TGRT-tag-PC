@@ -331,6 +331,9 @@ Public Class frmImport1
                     DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
 
                 Next
+
+                CLS_ALERT_UI.AlertInformation("Import Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
+
                 PGB1.Text = 0
                 Application.DoEvents()
 
@@ -360,7 +363,6 @@ Public Class frmImport1
         End Try
 
     End Function
-
 
     Private Function ImportPDTMaster() As Boolean
 

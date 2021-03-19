@@ -20,8 +20,6 @@ Public Class frmMaster_Product
 
     End Sub
 
-
-
     Public Sub Getdata()
         Try
             Dim StrSQL As New StringBuilder()
@@ -34,12 +32,11 @@ Public Class frmMaster_Product
             StrSQL.Append(",[f_Part_No] as [Part No]")
             StrSQL.Append(",[f_User_Import] as [User Import]")
             StrSQL.Append(",[f_User_Edit] as [User Edit]")
-            StrSQL.Append(",[f_Import_TimeStamp] as [Import TimeStamp]")
-            StrSQL.Append(",[f_Edit_TimeStamp] as [Edit TimeStamp]")
+            StrSQL.Append(",Format([f_Import_TimeStamp],'dd-MM-yyyy HH:mm:ss') as [Import TimeStamp]")
+            StrSQL.Append(",Format([f_Edit_TimeStamp],'dd-MM-yyyy HH:mm:ss') as [Edit TimeStamp]")
             StrSQL.Append(" From Tbl_Master_Product")
             StrSQL.Append(" Order by ID asc")
 
-            'DT = SQLConnect._SQL.Read(StrSQL.ToString)
             DT = DatabaseConnection.OleDBConnect.Access.Read(StrSQL.ToString, css, False)
             dgw1.DataSource = DT
 
@@ -53,16 +50,11 @@ Public Class frmMaster_Product
         End Try
     End Sub
 
-
-
-
     Private Sub GetDatatoUpdate(ByVal pForm As frmMaster_Product_EDIT)
         If DGV.RowCount <= 0 Then Exit Sub
 
-
         Dim view As DevExpress.XtraGrid.Views.Grid.GridView = dgw1.FocusedView
         Dim row As DataRowView = view.GetRow(view.FocusedRowHandle)
-
 
         With pForm
             .data(0) = row.Item(0)
@@ -75,15 +67,7 @@ Public Class frmMaster_Product
             .data(7) = row.Item(7)
         End With
 
-
-
-
-
     End Sub
-
-
-
-
 
     Private Sub dgw1_DoubleClick(sender As Object, e As EventArgs)
 
@@ -142,6 +126,7 @@ Public Class frmMaster_Product
         Try
             Dim view1 As DevExpress.XtraGrid.Views.Grid.GridView = dgw1.FocusedView
             Dim SB As New StringBuilder()
+            Cursor = Cursors.WaitCursor
             For I = 0 To DGV.SelectedRowsCount() - 1
                 Dim row As DataRowView = view1.GetRow(DGV.GetSelectedRows(I))
                 SB.Remove(0, SB.Length)
@@ -150,7 +135,7 @@ Public Class frmMaster_Product
 
                 resExecute = DatabaseConnection.OleDBConnect.Access.Execute(SB.ToString, css, False)
             Next
-
+            Cursor = Cursors.Default
             If resExecute = True Then
                 CLS_ALERT_UI.AlertInformation("Delete Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
             Else
@@ -204,9 +189,9 @@ Public Class frmMaster_Product
             Exit Sub
         End If
 
-        If MessageBox.Show(Me, "Do you confirm to edit your selected ", "Confirm to Edit", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
-            Exit Sub
-        End If
+        'If MessageBox.Show(Me, "Do you confirm to edit your selected ", "Confirm to Edit", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.No Then
+        '    Exit Sub
+        'End If
 
         Call Edit_show()
     End Sub

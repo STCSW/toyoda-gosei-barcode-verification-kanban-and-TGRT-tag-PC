@@ -46,10 +46,7 @@ Public Class frmBarcodeVerification
             Dim tmp_Qr As String
             Dim StrSQL As New StringBuilder()
 
-
-            'tmp_Qr = txtQRcode.Text.Trim
             PictureBox3.Image = Nothing
-
 
             tmp_Qr = Dummy_qr
             tmp_Qr = tmp_Qr.ToUpper
@@ -57,10 +54,19 @@ Public Class frmBarcodeVerification
 
             Dim tmp_tb As New DataTable
 
-            StrSQL.Append("SELECT * From [View_ALL_PRODUCT_MAS]")
-            StrSQL.Append(" WHERE [TGRT Barcode]='" & tmp_Qr & "'")
+            StrSQL.Append("SELECT [f_TGRT_Code] ")
+            StrSQL.Append(" ,[f_TGRT_Barcode]")
+            StrSQL.Append(" ,[f_Customer_Barcode]")
+            StrSQL.Append(" ,[f_Part_Name]")
+            StrSQL.Append(" ,[f_Part_No]")
+            StrSQL.Append(" ,[f_User_Import]")
+            StrSQL.Append(" ,[f_User_Edit]")
+            StrSQL.Append(" ,FORMAT([f_Import_TimeStamp],'dd-MM-yyyy HH:mm:ss') as [f_Import_TimeStamp]")
+            StrSQL.Append(" ,FORMAT([f_Edit_TimeStamp],'dd-MM-yyyy HH:mm:ss') as [f_Edit_TimeStamp]")
+            StrSQL.Append(" From Tbl_Master_Product")
+            StrSQL.Append(" WHERE [f_TGRT_Barcode]='" & tmp_Qr & "'")
 
-            tmp_tb = DatabaseConnection.SQLConnect.SQL.Read(StrSQL.ToString, cs)
+            tmp_tb = DatabaseConnection.OleDBConnect.Access.Read(StrSQL.ToString, css, False)
 
             If tmp_tb Is Nothing Then
                 Dim strMessage As String = "'" & tmp_Qr & "' not found in master product!!"
@@ -124,21 +130,21 @@ Public Class frmBarcodeVerification
             lblTGRT_Code.Text = tmp_tb.Rows(0).Item(0).ToString
             lblBarcode.Text = tmp_tb.Rows(0).Item(1).ToString
 
-            If tmp_tb.Rows(0).Item(2).ToString.Length > CInt(tmp_tb.Rows(0).Item("Cut Digit Length").ToString) Then
-                lblCusBarcode.Text = tmp_tb.Rows(0).Item(2).ToString.Substring(0, tmp_tb.Rows(0).Item("Cut Digit Length").ToString)
-            Else
-                lblCusBarcode.Text = tmp_tb.Rows(0).Item(2).ToString
-            End If
+            'If tmp_tb.Rows(0).Item(2).ToString.Length > CInt(tmp_tb.Rows(0).Item("Cut Digit Length").ToString) Then
+            '    lblCusBarcode.Text = tmp_tb.Rows(0).Item(2).ToString.Substring(0, tmp_tb.Rows(0).Item("Cut Digit Length").ToString)
+            'Else
+            '    lblCusBarcode.Text = tmp_tb.Rows(0).Item(2).ToString
+            'End If
+
+            lblCusBarcode.Text = tmp_tb.Rows(0).Item(2).ToString
 
             lblPartName.Text = tmp_tb.Rows(0).Item(3).ToString
             lblPartNo.Text = tmp_tb.Rows(0).Item(4).ToString
-            lblLocation.Text = tmp_tb.Rows(0).Item(5).ToString
+            'lblLocation.Text = tmp_tb.Rows(0).Item(5).ToString
 
             TGRT_code_Acture = lblTGRT_Code.Text
 
-
-            txtScan2.MaxLength = tmp_tb.Rows(0).Item("Cut Digit Length").ToString
-
+            'txtScan2.MaxLength = tmp_tb.Rows(0).Item("Cut Digit Length").ToString
 
             If TGRT_code_Acture = TGRT_code_Before Then
                 Countup_Item = Countup_Item
@@ -245,7 +251,7 @@ Public Class frmBarcodeVerification
         lblCusBarcode.Text = String.Empty
         lblPartName.Text = String.Empty
         lblPartNo.Text = String.Empty
-        lblLocation.Text = String.Empty
+        'lblLocation.Text = String.Empty
         ' PictureBox3.Image = Nothing
     End Sub
 
@@ -260,7 +266,7 @@ Public Class frmBarcodeVerification
             StrSQL.Append(" ,[f_Customer_Barcode]")
             StrSQL.Append(" ,[f_Part_Name]")
             StrSQL.Append(" ,[f_Part_No]")
-            StrSQL.Append(" ,[f_Location]")
+            'StrSQL.Append(" ,[f_Location]")
             StrSQL.Append(" ,[f_User_Scan]")
             StrSQL.Append(" ,[f_Scan_TimeStamp]")
             StrSQL.Append(", [f_Transaction_Status])")
@@ -272,12 +278,13 @@ Public Class frmBarcodeVerification
             StrSQL.Append(" ,N'" & lblScan2.Text & "'")
             StrSQL.Append(" ,N'" & lblPartName.Text & "'")
             StrSQL.Append(" ,N'" & lblPartNo.Text & "'")
-            StrSQL.Append(" ,N'" & lblLocation.Text & "'")
+            'StrSQL.Append(" ,N'" & lblLocation.Text & "'")
             StrSQL.Append(" ,N'" & C_Variable.USER_LOGIN & "'")
             StrSQL.Append(" ,getdate()")
             StrSQL.Append(" ,N'" & pStatus & "'")
             StrSQL.Append(") ")
-            DatabaseConnection.SQLConnect.SQL.Execute(StrSQL.ToString, cs)
+            'DatabaseConnection.SQLConnect.SQL.Execute(StrSQL.ToString, cs)
+            DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
 
         Catch ex As Exception
 
@@ -328,7 +335,7 @@ Public Class frmBarcodeVerification
 
     Private Sub frmBarcodeVerification_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblCountUp.Text = Countup_Item
-        txtScan2.MaxLength = My.Settings.Count_CutDigit
+        'txtScan2.MaxLength = My.Settings.Count_CutDigit
 
     End Sub
 
