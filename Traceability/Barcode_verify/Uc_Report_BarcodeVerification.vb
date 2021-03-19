@@ -11,7 +11,6 @@ Public Class Uc_Report_BarcodeVerification
 
     Private Sub GridView_CustomDrawRowIndicator2(sender As Object, e As DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs)
 
-
         If e.RowHandle + 1 > 0 Then e.Info.DisplayText = e.RowHandle + 1
 
     End Sub
@@ -19,9 +18,7 @@ Public Class Uc_Report_BarcodeVerification
     Private Sub GridView2_ShowFilterPopupListBox(ByVal sender As Object, ByVal e As _
  DevExpress.XtraGrid.Views.Grid.FilterPopupListBoxEventArgs)
 
-
         e.ComboBox.AppearanceDropDown.Font = New Font("Tahoma", 10)
-        'e.ComboBox.AppearanceDropDown.ForeColor = Color.Blue
     End Sub
     Private Sub uc_ProductionPlan_Load(sender As Object, e As EventArgs) Handles Me.Load
         DateEdit1.EditValue = Now.AddMonths(-1)
@@ -33,37 +30,30 @@ Public Class Uc_Report_BarcodeVerification
     Private Function getdata() As Boolean
         Try
 
+            Dim sb As New StringBuilder
+            sb.Append("Select")
+            sb.Append(" [f_Scan_TimeStamp] as [Scan TimeStamp]")
+            sb.Append(" ,[f_TGRT_Barcode] as [TGRT_Barcode]")
+            sb.Append(" ,[f_Customer_Barcode] as [Customer Barcode]")
+            sb.Append(" ,[f_Transaction_Status] as [Transaction Status]")
+            sb.Append(" ,[f_TGRT_Code] as [TGRT Code]")
+            sb.Append(" ,[f_Part_Name] as [Part Name]")
+            sb.Append(" ,[f_Part_No] as [Part No]")
+            sb.Append(" ,[f_User_Scan] as [User Scan]")
+            sb.Append(" From tbl_Transaction")
+            sb.Append(" Where [f_Scan_TimeStamp] >= #" & CDate(DateEdit1.EditValue).ToString("dd-MM-yyyy") & " 00:00:00" & "#")
+            sb.Append(" and [f_Scan_TimeStamp] <= #" & CDate(DateEdit2.EditValue).ToString("dd-MM-yyyy") & " 23:59:59" & "#")
+            sb.Append(" Order by [f_Scan_TimeStamp] desc")
 
-            Dim query_parameters(1) As SqlParameter
-            query_parameters(0) = New SqlParameter("@StartDate", SqlDbType.NVarChar)
-            query_parameters(0).Value = CDate(DateEdit1.EditValue).ToString("yyyy-MM-dd")
-            query_parameters(1) = New SqlParameter("@EndDate", SqlDbType.NVarChar)
-            query_parameters(1).Value = CDate(DateEdit2.EditValue).AddDays(1).ToString("yyyy-MM-dd")
-
-            Dim DT As DataTable = DatabaseConnection.SQLConnect.SQL.ReadSP("sp_GET_REPORT_LOG_SCAN", cs, query_parameters)
+            Dim DT As DataTable = DatabaseConnection.OleDBConnect.Access.Read(sb.ToString(), css, True)
 
             DGW.DataSource = DT
             dgv.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect
             dgv.OptionsSelection.MultiSelect = True
-            'Call get_CHART()
+
             If DT IsNot Nothing Then
 
-                'DGV2.Columns("PlanQty").DisplayFormat.FormatType = FormatType.Numeric
-                'DGV2.Columns("PlanQty").DisplayFormat.FormatString = "#,##0"
-                'DGV2.Columns("ScanQty").DisplayFormat.FormatType = FormatType.Numeric
-                'DGV2.Columns("ScanQty").DisplayFormat.FormatString = "#,##0"
-                'DGV2.Columns("Remain").DisplayFormat.FormatType = FormatType.Numeric
-                'DGV2.Columns("Remain").DisplayFormat.FormatString = "#,##0"
-
-                'If DT.Rows.Count > 0 Then
-                '    getdataPlanDetail(DT.Rows(0).Item("Plan No").ToString)
-                'End If
-
-                'DGV2.ClearGrouping()
-                'DGV2.Columns(8).GroupIndex = 0
-                'DGV2.OptionsSelection.ShowCheckBoxSelectorInGroupRow = DefaultBoolean.True
                 For i = 0 To DT.Columns.Count - 1
-                    ' MessageBox.Show(DGV.Columns(i).ColumnType.ToString)
 
                     Dim str_Contains As String = dgv.Columns(i).FieldName
 
@@ -71,7 +61,6 @@ Public Class Uc_Report_BarcodeVerification
                         dgv.Columns(i).DisplayFormat.FormatType = FormatType.DateTime
                         dgv.Columns(i).DisplayFormat.FormatString = "dd-MMM-yyyy HH:mm:ss"
                     End If
-
 
                 Next i
                 dgv.BestFitColumns()
@@ -104,8 +93,6 @@ Public Class Uc_Report_BarcodeVerification
 
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
         Try
-            'dgv2.ExportToXls("Export.xls")
-            'Process.Start("Export.xls")
             dgv.ExportToXls("Export.xls")
             Process.Start("Export.xls")
         Catch ex As Exception
@@ -116,31 +103,6 @@ Public Class Uc_Report_BarcodeVerification
 
     Function getdata_CHART() As DataTable
         Dim Str_commad As New StringBuilder()
-        'Str_commad.Append("select ")
-        'Str_commad.Append("[f_Product_Code] as 'Product Code' ")
-
-        '' Str_commad.Append(",SUM(f_Qty_Per_Box) as 'QTY PRODUCTION' ")
-        'Str_commad.Append(",100 as 'QTY PRODUCTION' ")
-
-        ''    FROM [dbTraceability].[dbo].[tbl_Sticker_Serial_Log]
-
-        'Str_commad.Append("FROM [dbo].[tbl_Sticker_Serial_Log] ")
-        'Str_commad.Append("	where [f_Product_Code] ='840233'")
-        'Str_commad.Append(" group by [f_Product_Code] ")
-
-        'Str_commad.Append("SELECT *,T1.[QTY PRODUCTION]*100.0 /T1.[TOTAL PRODUCTION] AS'PERCENT' FROM (")
-        'Str_commad.Append("select ")
-        'Str_commad.Append("[f_Product_Code] as 'Product Code'")
-        'Str_commad.Append(",SUM(f_Qty_Per_Box) as 'QTY PRODUCTION'")
-        'Str_commad.Append(",(select TOP 1 SUM(f_Qty_Per_Box)  FROM [tbl_Sticker_Serial_Log] WHERE f_Scan_IN_timestamp >= '2018-10-14 00:00:00'")
-        'Str_commad.Append(" AND f_Scan_IN_timestamp <= '2018-10-16 00:00:00') AS 'TOTAL PRODUCTION'")
-        'Str_commad.Append("    FROM [dbTraceability].[dbo].[tbl_Sticker_Serial_Log]")
-
-        'Str_commad.Append("WHERE f_Scan_IN_timestamp >= '2018-10-14 00:00:00'")
-        'Str_commad.Append(" AND f_Scan_IN_timestamp <= '2018-10-16 00:00:00'")
-        'Str_commad.Append("	  group by [f_Product_Code]")
-        'Str_commad.Append("	  ) T1")
-        '    Dim DT As DataTable = DatabaseConnection.SQLConnect.SQL.ReadSP("sp_GET_REPORT_IN_DAILY", cs, query_parameters)
 
         Dim query_parameters(1) As SqlParameter
         query_parameters(0) = New SqlParameter("@StartDate", SqlDbType.NVarChar)
@@ -151,9 +113,6 @@ Public Class Uc_Report_BarcodeVerification
         Dim DT As DataTable = DatabaseConnection.SQLConnect.SQL.ReadSP("sp_GET_REPORT_LOG_SCAN", cs, query_parameters)
 
         Return DT
-
-
-
 
     End Function
     Private Sub Button1_Click(sender As Object, e As EventArgs)
@@ -168,7 +127,6 @@ Public Class Uc_Report_BarcodeVerification
         Panel1.Controls.Clear()
         Dim dt As New DataTable
         dt = getdata_CHART()
-        '   GridControl1.DataSource = dt
         Dim pieChart As New ChartControl()
         Dim series1 As New Series("PART PRODUCTION ", ViewType.Pie)
         For Each dr As DataRow In dt.Rows
@@ -177,7 +135,6 @@ Public Class Uc_Report_BarcodeVerification
 
         pieChart.Series.Add(series1)
         series1.Label.TextPattern = "{A}: {VP:p3}"
-
 
         CType(series1.Label, PieSeriesLabel).Position = PieSeriesLabelPosition.TwoColumns
         CType(series1.Label, PieSeriesLabel).ResolveOverlappingMode = ResolveOverlappingMode.Default
@@ -206,25 +163,17 @@ Public Class Uc_Report_BarcodeVerification
         Dim View As GridView = sender
         If e.Column.FieldName = "Status" Then
 
-
             Dim category As String = View.GetRowCellDisplayText(e.RowHandle, View.Columns("Status"))
             e.Appearance.ForeColor = Color.Black
             Select Case category
 
                 Case "NG"
-                    'e.Appearance.BackColor = Color.White
                     e.Appearance.BackColor = Color.Red
 
-
                 Case "OK"
-                    '   e.Appearance.BackColor = Color.White
-
                     e.Appearance.BackColor = Color.MediumSpringGreen
 
             End Select
-
-
-
         End If
     End Sub
 End Class

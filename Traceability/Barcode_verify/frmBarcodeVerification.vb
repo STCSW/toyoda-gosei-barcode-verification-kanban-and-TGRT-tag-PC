@@ -260,31 +260,29 @@ Public Class frmBarcodeVerification
 
         Dim StrSQL As New StringBuilder()
         Try
-            StrSQL.Append(" INSERT INTO [dbo].[tbl_Transaction]")
+            StrSQL.Append(" INSERT INTO tbl_Transaction")
             StrSQL.Append(" ([f_TGRT_Code]")
             StrSQL.Append(" ,[f_TGRT_Barcode]")
             StrSQL.Append(" ,[f_Customer_Barcode]")
             StrSQL.Append(" ,[f_Part_Name]")
             StrSQL.Append(" ,[f_Part_No]")
-            'StrSQL.Append(" ,[f_Location]")
             StrSQL.Append(" ,[f_User_Scan]")
             StrSQL.Append(" ,[f_Scan_TimeStamp]")
             StrSQL.Append(", [f_Transaction_Status])")
             StrSQL.Append(" VALUES ")
             StrSQL.Append("( ")
 
-            StrSQL.Append(" N'" & lblTGRT_Code.Text & "'")
-            StrSQL.Append(" ,N'" & lblScan1.Text & "'")
-            StrSQL.Append(" ,N'" & lblScan2.Text & "'")
-            StrSQL.Append(" ,N'" & lblPartName.Text & "'")
-            StrSQL.Append(" ,N'" & lblPartNo.Text & "'")
-            'StrSQL.Append(" ,N'" & lblLocation.Text & "'")
-            StrSQL.Append(" ,N'" & C_Variable.USER_LOGIN & "'")
-            StrSQL.Append(" ,getdate()")
-            StrSQL.Append(" ,N'" & pStatus & "'")
+            StrSQL.Append(" '" & lblTGRT_Code.Text & "'")
+            StrSQL.Append(" ,'" & lblScan1.Text & "'")
+            StrSQL.Append(" ,'" & lblScan2.Text & "'")
+            StrSQL.Append(" ,'" & lblPartName.Text & "'")
+            StrSQL.Append(" ,'" & lblPartNo.Text & "'")
+            StrSQL.Append(" ,'" & C_Variable.USER_LOGIN & "'")
+            StrSQL.Append(" ,Now()")
+            StrSQL.Append(" ,'" & pStatus & "'")
             StrSQL.Append(") ")
-            'DatabaseConnection.SQLConnect.SQL.Execute(StrSQL.ToString, cs)
-            DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
+
+            Dim res As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, True)
 
         Catch ex As Exception
 
