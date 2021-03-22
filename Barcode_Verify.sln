@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Barcode_Verify", "Traceability\Barcode_Verify.vbproj", "{A42E283F-CFC7-4C5D-9AEC-A777FB46C79D}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupToyodaGosei", "SetupToyodaGosei\SetupToyodaGosei.vdproj", "{247BA8C5-DABD-4F7F-AAF3-A84522EC1503}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{A42E283F-CFC7-4C5D-9AEC-A777FB46C79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A42E283F-CFC7-4C5D-9AEC-A777FB46C79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A42E283F-CFC7-4C5D-9AEC-A777FB46C79D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{247BA8C5-DABD-4F7F-AAF3-A84522EC1503}.Debug|Any CPU.ActiveCfg = Debug
+		{247BA8C5-DABD-4F7F-AAF3-A84522EC1503}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

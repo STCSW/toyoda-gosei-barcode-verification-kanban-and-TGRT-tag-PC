@@ -58,55 +58,57 @@ Public Class frmConfigDb
 
 
     Public Function TEST_CONNECTION() As Boolean
-        Cursor.Current = Cursors.WaitCursor
-        Dim pcConnector As New SqlConnection()
-        Dim cs_TEST As String = String.Empty
 
 
-        cs_TEST = "Server = " & txtServerName.Text.Trim & ";"
-        cs_TEST &= "Database  = " & txtDatabaseName.Text.Trim & ";"
-        cs_TEST &= "User Id = " & txtUserId.Text.Trim & ";"
-        cs_TEST &= "Password = " & txtPass.Text.Trim & ";"
+        'Cursor.Current = Cursors.WaitCursor
+        'Dim pcConnector As New SqlConnection()
+        'Dim cs_TEST As String = String.Empty
+
+
+        'cs_TEST = "Server = " & txtServerName.Text.Trim & ";"
+        'cs_TEST &= "Database  = " & txtDatabaseName.Text.Trim & ";"
+        'cs_TEST &= "User Id = " & txtUserId.Text.Trim & ";"
+        'cs_TEST &= "Password = " & txtPass.Text.Trim & ";"
 
 
 
-        Try
+        'Try
 
-            pcConnector.ConnectionString = cs_TEST
-            pcConnector.Open()
-            If pcConnector.State = ConnectionState.Open Then
-                pcConnector.Close()
-            End If
+        '    pcConnector.ConnectionString = cs_TEST
+        '    pcConnector.Open()
+        '    If pcConnector.State = ConnectionState.Open Then
+        '        pcConnector.Close()
+        '    End If
 
-            Cursor.Current = Cursors.Default
-            Return True
+        '    Cursor.Current = Cursors.Default
+        '    Return True
 
-        Catch sqlExp As SqlException
-            Cursor.Current = Cursors.Default
-            Dim errorMsg As String = "The connection fail to database " & txtServerName.Text & " [" & sqlExp.Message & " ]"
-            '  C_ERROR_LOG.KEEP_LOG(errorMsg)
+        'Catch sqlExp As SqlException
+        '    Cursor.Current = Cursors.Default
+        '    Dim errorMsg As String = "The connection fail to database " & txtServerName.Text & " [" & sqlExp.Message & " ]"
+        '    '  C_ERROR_LOG.KEEP_LOG(errorMsg)
 
-            '  MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        '    '  MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 
-            'MsgBox(errorMsg, "Connection fail.", MessageBoxButtons.OK)
+        '    'MsgBox(errorMsg, "Connection fail.", MessageBoxButtons.OK)
 
-            MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        '    MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 
-            Return False
+        '    Return False
 
-        Catch InvalidEx As InvalidExpressionException
-            Cursor.Current = Cursors.Default
-            Dim errorMsg As String = "The connection fail to database " & txtServerName.Text & " [" & InvalidEx.Message & " ]"
-            '  C_ERROR_LOG.KEEP_LOG(errorMsg)
-            '  MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        'Catch InvalidEx As InvalidExpressionException
+        '    Cursor.Current = Cursors.Default
+        '    Dim errorMsg As String = "The connection fail to database " & txtServerName.Text & " [" & InvalidEx.Message & " ]"
+        '    '  C_ERROR_LOG.KEEP_LOG(errorMsg)
+        '    '  MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 
 
-            ' MsgBox(errorMsg, "Connection fail.", MessageBoxButtons.OK)
-            MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        '    ' MsgBox(errorMsg, "Connection fail.", MessageBoxButtons.OK)
+        '    MessageBox.Show(errorMsg, "Connection fail.", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 
-            Return False
+        '    Return False
 
-        End Try
+        'End Try
 
     End Function
     'Public Function TEST_CONNECTION2() As Boolean

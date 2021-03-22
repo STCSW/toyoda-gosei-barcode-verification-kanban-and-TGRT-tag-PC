@@ -24,6 +24,8 @@ Partial Class frmConfigDb
     Private Sub InitializeComponent()
         Me.fbdQAD = New System.Windows.Forms.FolderBrowserDialog()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtPahtFile = New System.Windows.Forms.TextBox()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.txtServerName = New System.Windows.Forms.TextBox()
         Me.txtTimeout = New System.Windows.Forms.TextBox()
@@ -59,8 +61,6 @@ Partial Class frmConfigDb
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.txtPahtFile = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.TabPage1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
@@ -96,9 +96,26 @@ Partial Class frmConfigDb
         Me.TabPage1.Text = "Database Config"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(24, 35)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(67, 13)
+        Me.Label9.TabIndex = 31
+        Me.Label9.Text = "PAHT FILE :"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtPahtFile
+        '
+        Me.txtPahtFile.Location = New System.Drawing.Point(27, 51)
+        Me.txtPahtFile.Name = "txtPahtFile"
+        Me.txtPahtFile.Size = New System.Drawing.Size(258, 20)
+        Me.txtPahtFile.TabIndex = 30
+        '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(210, 58)
+        Me.Button2.Location = New System.Drawing.Point(27, 77)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 29
@@ -188,6 +205,7 @@ Partial Class frmConfigDb
         Me.BtnConnTest.TabIndex = 16
         Me.BtnConnTest.Text = "Connection Test"
         Me.BtnConnTest.UseVisualStyleBackColor = True
+        Me.BtnConnTest.Visible = False
         '
         'ProgressBar1
         '
@@ -440,23 +458,6 @@ Partial Class frmConfigDb
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        '
-        'txtPahtFile
-        '
-        Me.txtPahtFile.Location = New System.Drawing.Point(97, 32)
-        Me.txtPahtFile.Name = "txtPahtFile"
-        Me.txtPahtFile.Size = New System.Drawing.Size(188, 20)
-        Me.txtPahtFile.TabIndex = 30
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(24, 35)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(67, 13)
-        Me.Label9.TabIndex = 31
-        Me.Label9.Text = "PAHT FILE :"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'frmConfigDb
         '
