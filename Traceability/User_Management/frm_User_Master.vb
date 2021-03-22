@@ -246,12 +246,11 @@ Public Class frm_User_Master
                 Exit Sub
             End If
 
-            Dim LockVal As Integer = 0
-            If ToggleSwitch1.EditValue = True Then
-                LockVal = 1
+            Dim sw As Int32
+            If ToggleSwitch1.IsOn = True Then
+                sw = 1
             Else
-                LockVal = 0
-
+                sw = 0
             End If
 
             Dim TB As New DataTable
@@ -275,9 +274,9 @@ Public Class frm_User_Master
             StrSQL.Append(" '" & Trim(txtPassword.Text) & "',")
             StrSQL.Append(" '" & Trim(txtName.Text) & "',")
             StrSQL.Append(" Now(),")
-            StrSQL.Append(" '" & ToggleSwitch1.IsOn & "')")
+            StrSQL.Append(" '" & sw & "')")
 
-            Dim i As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
+            Dim i As Boolean = DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, True)
 
             If i = True Then
                 CLS_ALERT_UI.AlertInformation("Save Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)

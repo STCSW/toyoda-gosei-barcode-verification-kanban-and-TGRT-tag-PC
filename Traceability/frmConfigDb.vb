@@ -22,7 +22,7 @@ Public Class frmConfigDb
 
         txtCutdigit.Text = My.Settings.Count_CutDigit
 
-
+        txtPahtFile.Text = My.Settings.dbAccessPaht
 
     End Sub
 
@@ -36,6 +36,7 @@ Public Class frmConfigDb
         My.Settings.Username_DB = txtUserId.Text
         My.Settings.Password_DB = txtPass.Text
         My.Settings.Timeout = txtTimeout.Text
+        My.Settings.dbAccessPaht = txtPahtFile.Text.Trim()
         My.Settings.Save()
         Call UpdateConfig_Ini()
         MessageBox.Show("Save setting success. ", "Success.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1)
@@ -276,8 +277,10 @@ Public Class frmConfigDb
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If OpenFileDialog1.ShowDialog = DialogResult.OK Then
-            My.Settings.dbAccessPaht = OpenFileDialog1.FileName
-            My.Settings.Save()
+            txtPahtFile.Text = OpenFileDialog1.FileName
+
+            'My.Settings.dbAccessPaht = OpenFileDialog1.FileName
+            'My.Settings.Save()
         End If
     End Sub
 End Class

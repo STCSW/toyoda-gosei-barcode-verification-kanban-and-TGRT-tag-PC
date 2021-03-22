@@ -24,6 +24,7 @@ Partial Class frmConfigDb
     Private Sub InitializeComponent()
         Me.fbdQAD = New System.Windows.Forms.FolderBrowserDialog()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.txtServerName = New System.Windows.Forms.TextBox()
         Me.txtTimeout = New System.Windows.Forms.TextBox()
         Me.txtUserId = New System.Windows.Forms.TextBox()
@@ -58,7 +59,8 @@ Partial Class frmConfigDb
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.txtPahtFile = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.TabPage1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
@@ -68,6 +70,8 @@ Partial Class frmConfigDb
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Label9)
+        Me.TabPage1.Controls.Add(Me.txtPahtFile)
         Me.TabPage1.Controls.Add(Me.Button2)
         Me.TabPage1.Controls.Add(Me.txtServerName)
         Me.TabPage1.Controls.Add(Me.txtTimeout)
@@ -89,36 +93,49 @@ Partial Class frmConfigDb
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(309, 352)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Server Config"
+        Me.TabPage1.Text = "Database Config"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(210, 58)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 29
+        Me.Button2.Text = "Select file"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'txtServerName
         '
-        Me.txtServerName.Location = New System.Drawing.Point(121, 6)
+        Me.txtServerName.Location = New System.Drawing.Point(121, 103)
         Me.txtServerName.Name = "txtServerName"
         Me.txtServerName.Size = New System.Drawing.Size(164, 20)
         Me.txtServerName.TabIndex = 21
+        Me.txtServerName.Visible = False
         '
         'txtTimeout
         '
-        Me.txtTimeout.Location = New System.Drawing.Point(121, 58)
+        Me.txtTimeout.Location = New System.Drawing.Point(121, 155)
         Me.txtTimeout.Name = "txtTimeout"
         Me.txtTimeout.Size = New System.Drawing.Size(164, 20)
         Me.txtTimeout.TabIndex = 28
+        Me.txtTimeout.Visible = False
         '
         'txtUserId
         '
-        Me.txtUserId.Location = New System.Drawing.Point(121, 83)
+        Me.txtUserId.Location = New System.Drawing.Point(121, 180)
         Me.txtUserId.Name = "txtUserId"
         Me.txtUserId.Size = New System.Drawing.Size(164, 20)
         Me.txtUserId.TabIndex = 23
+        Me.txtUserId.Visible = False
         '
         'txtDatabaseName
         '
-        Me.txtDatabaseName.Location = New System.Drawing.Point(121, 32)
+        Me.txtDatabaseName.Location = New System.Drawing.Point(121, 129)
         Me.txtDatabaseName.Name = "txtDatabaseName"
         Me.txtDatabaseName.Size = New System.Drawing.Size(164, 20)
         Me.txtDatabaseName.TabIndex = 22
+        Me.txtDatabaseName.Visible = False
         '
         'BtnCancel
         '
@@ -133,12 +150,13 @@ Partial Class frmConfigDb
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(50, 60)
+        Me.Label5.Location = New System.Drawing.Point(50, 157)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(65, 13)
         Me.Label5.TabIndex = 27
         Me.Label5.Text = "TIME OUT :"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label5.Visible = False
         '
         'BtnSave
         '
@@ -153,12 +171,13 @@ Partial Class frmConfigDb
         'ChkShowPassword
         '
         Me.ChkShowPassword.AutoSize = True
-        Me.ChkShowPassword.Location = New System.Drawing.Point(183, 132)
+        Me.ChkShowPassword.Location = New System.Drawing.Point(183, 229)
         Me.ChkShowPassword.Name = "ChkShowPassword"
         Me.ChkShowPassword.Size = New System.Drawing.Size(102, 17)
         Me.ChkShowPassword.TabIndex = 26
         Me.ChkShowPassword.Text = "Show Password"
         Me.ChkShowPassword.UseVisualStyleBackColor = True
+        Me.ChkShowPassword.Visible = False
         '
         'BtnConnTest
         '
@@ -181,50 +200,55 @@ Partial Class frmConfigDb
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(24, 9)
+        Me.Label1.Location = New System.Drawing.Point(24, 106)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(91, 13)
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "SERVER NAME :"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label1.Visible = False
         '
         'txtPass
         '
-        Me.txtPass.Location = New System.Drawing.Point(121, 109)
+        Me.txtPass.Location = New System.Drawing.Point(121, 206)
         Me.txtPass.Name = "txtPass"
         Me.txtPass.Size = New System.Drawing.Size(164, 20)
         Me.txtPass.TabIndex = 24
         Me.txtPass.UseSystemPasswordChar = True
+        Me.txtPass.Visible = False
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(11, 35)
+        Me.Label2.Location = New System.Drawing.Point(11, 132)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(104, 13)
         Me.Label2.TabIndex = 18
         Me.Label2.Text = "DATABASE NAME :"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label2.Visible = False
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(58, 86)
+        Me.Label3.Location = New System.Drawing.Point(58, 183)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(57, 13)
         Me.Label3.TabIndex = 19
         Me.Label3.Text = "USER ID :"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label3.Visible = False
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(39, 112)
+        Me.Label4.Location = New System.Drawing.Point(39, 209)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(76, 13)
         Me.Label4.TabIndex = 20
         Me.Label4.Text = "PASSWORD :"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label4.Visible = False
         '
         'TabControl1
         '
@@ -256,7 +280,7 @@ Partial Class frmConfigDb
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(309, 208)
+        Me.TabPage3.Size = New System.Drawing.Size(309, 352)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "PICTURE FOLDER CONFIG"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -391,7 +415,7 @@ Partial Class frmConfigDb
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(309, 208)
+        Me.TabPage2.Size = New System.Drawing.Size(309, 352)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "RUN SQL"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -417,14 +441,22 @@ Partial Class frmConfigDb
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Button2
+        'txtPahtFile
         '
-        Me.Button2.Location = New System.Drawing.Point(27, 215)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 29
-        Me.Button2.Text = "Select file"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.txtPahtFile.Location = New System.Drawing.Point(97, 32)
+        Me.txtPahtFile.Name = "txtPahtFile"
+        Me.txtPahtFile.Size = New System.Drawing.Size(188, 20)
+        Me.txtPahtFile.TabIndex = 30
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(24, 35)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(67, 13)
+        Me.Label9.TabIndex = 31
+        Me.Label9.Text = "PAHT FILE :"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'frmConfigDb
         '
@@ -484,4 +516,6 @@ End Sub
     Friend WithEvents txtPicture_folder2_zoom As TextBox
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Button2 As Button
+    Friend WithEvents Label9 As Label
+    Friend WithEvents txtPahtFile As TextBox
 End Class

@@ -193,7 +193,7 @@ Public Class frmLogin
 
 
         Dim Permission As String = dRow(0)("UserType").ToString()
-        C_Variable.Line_Operattion = dRow(0)("Line_Operattion").ToString()
+        'C_Variable.Line_Operattion = dRow(0)("Line_Operattion").ToString()
         If Permission = "ADMIN" Or Permission = "Admin" Or Permission = "admin" Then
             C_Variable.IS_LOGIN_ADMIN = True
         Else
