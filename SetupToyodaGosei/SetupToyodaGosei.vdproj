@@ -4748,7 +4748,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ToyodaGosei"
         "ProductCode" = "8:{1D97F3D0-DBC7-40B4-9CDE-2F5CCEF1ADF4}"
-        "PackageCode" = "8:{7AAB02B3-ED6F-4CDE-AED1-D699D2586E28}"
+        "PackageCode" = "8:{2276E209-0EC7-4E08-AFA2-886051A5AE09}"
         "UpgradeCode" = "8:{FD5AA064-E227-4265-8E9A-D5706069E539}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -4874,12 +4874,26 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_7400AFCED8784EC3924AF281B3AE34DC"
             "Folder" = "8:_B3FBBCFFE5C8476DBE2A8F017EF0EAE4"
             "WorkingFolder" = "8:_BF506B47D4E3407F8E5FAE511417CFB1"
-            "Icon" = "8:"
+            "Icon" = "8:_7400AFCED8784EC3924AF281B3AE34DC"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BAEEE34AF9B74525B68B7D3851071BB4"
+            {
+            "Name" = "8:ToyodaGosei"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:32512"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_7400AFCED8784EC3924AF281B3AE34DC"
+            "Folder" = "8:_BF506B47D4E3407F8E5FAE511417CFB1"
+            "WorkingFolder" = "8:_BF506B47D4E3407F8E5FAE511417CFB1"
+            "Icon" = "8:_7400AFCED8784EC3924AF281B3AE34DC"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E989A6D3E23743E8ADFA959C958019D1"
@@ -4888,12 +4902,12 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
+            "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
             "Target" = "8:_7400AFCED8784EC3924AF281B3AE34DC"
             "Folder" = "8:_E5BC0C877880443A8B74ADEC3F7D7DB4"
             "WorkingFolder" = "8:_BF506B47D4E3407F8E5FAE511417CFB1"
-            "Icon" = "8:"
+            "Icon" = "8:_7400AFCED8784EC3924AF281B3AE34DC"
             "Feature" = "8:"
             }
         }
@@ -5295,34 +5309,6 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1396D8076AFB40ACAAA59B77819FA5E8"
-            {
-            "SourcePath" = "8:"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_BF506B47D4E3407F8E5FAE511417CFB1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:ContentFiles"
-            "OutputProjectGuid" = "8:{A42E283F-CFC7-4C5D-9AEC-A777FB46C79D}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7400AFCED8784EC3924AF281B3AE34DC"
             {
             "SourcePath" = "8:..\\Traceability\\obj\\Debug\\Barcode_Verify.exe"
@@ -5351,7 +5337,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_88A832715D344388960FA018ADD22600"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F678F3A17A494E23840D8F69C8DD049A"
             {
             "SourcePath" = "8:"
             "TargetName" = "8:"

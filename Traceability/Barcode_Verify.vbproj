@@ -603,7 +603,9 @@
     <None Include="Resources\profilereport.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1531735-logo.ico" />
+    <Content Include="1531735-logo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="dbToyodaGosei.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
