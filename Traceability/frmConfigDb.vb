@@ -41,7 +41,8 @@ Public Class frmConfigDb
         Call UpdateConfig_Ini()
         MessageBox.Show("Save setting success. ", "Success.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1)
 
-        cs = "Server = " & My.Settings.Server & ";Database = " & My.Settings.Database & ";User Id = " & My.Settings.Username_DB & ";Password = " & My.Settings.Password_DB & ";" & "Connection Timeout=" & My.Settings.Timeout & ";"
+        'cs = "Server = " & My.Settings.Server & ";Database = " & My.Settings.Database & ";User Id = " & My.Settings.Username_DB & ";Password = " & My.Settings.Password_DB & ";" & "Connection Timeout=" & My.Settings.Timeout & ";"
+        css = "Provider=Microsoft.ACE.Oledb.12.0; Data Source=" + My.Settings.dbAccessPaht + ";"
 
 
     End Sub
@@ -217,13 +218,13 @@ Public Class frmConfigDb
         Me.Close()
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim sb_query As New StringBuilder
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs)
+        'Dim sb_query As New StringBuilder
 
 
-        sb_query.Append(TextBox1.Text)
+        'sb_query.Append(TextBox1.Text)
 
-        DatabaseConnection.SQLConnect.SQL.Execute(sb_query.ToString, cs, True)
+        'DatabaseConnection.SQLConnect.SQL.Execute(sb_query.ToString, cs, True)
 
     End Sub
 
@@ -280,6 +281,15 @@ Public Class frmConfigDb
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If OpenFileDialog1.ShowDialog = DialogResult.OK Then
             txtPahtFile.Text = OpenFileDialog1.FileName
+
+            'My.Settings.dbAccessPaht = OpenFileDialog1.FileName
+            'My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub Button1_Click_2(sender As Object, e As EventArgs) Handles Button1.Click
+        If FolderBrowserDialog1.ShowDialog = DialogResult.OK Then
+            txtPicture_folder1.Text = FolderBrowserDialog1.SelectedPath & "\"
 
             'My.Settings.dbAccessPaht = OpenFileDialog1.FileName
             'My.Settings.Save()

@@ -208,6 +208,7 @@ Partial Class frmBarcodeVerification
         Me.CbZoom.TabIndex = 24
         Me.CbZoom.Text = "ZOOM"
         Me.CbZoom.UseVisualStyleBackColor = True
+        Me.CbZoom.Visible = False
         '
         'Label12
         '

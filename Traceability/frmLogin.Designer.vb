@@ -96,11 +96,11 @@ Partial Class frmLogin
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(403, 119)
+        Me.Label1.Location = New System.Drawing.Point(278, 102)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(147, 36)
+        Me.Label1.Size = New System.Drawing.Size(379, 36)
         Me.Label1.TabIndex = 30
-        Me.Label1.Text = "SERVICE"
+        Me.Label1.Text = "BARCODE VERIFICATION"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'PictureBox1

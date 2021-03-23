@@ -364,13 +364,16 @@ Public Class frmBarcodeVerification
             ' If fd.ShowDialog() = DialogResult.OK Then
             'fd.FileName = "D:\_Work\__Current_DW\Toyoda Gosei_Label printing and Barcode verify Service part system\Picture1\" & pTGRT & ".jpg"
 
-            If pZoom Then
-                fd.FileName = My.Settings.PATH_FOLDER_PIC1_ZOOM & pTGRT & ".jpg"
+            'If pZoom Then
+            '    fd.FileName = My.Settings.PATH_FOLDER_PIC1_ZOOM & pTGRT & ".jpg"
 
-            Else
-                fd.FileName = My.Settings.PATH_FOLDER_PIC1 & pTGRT & ".jpg"
+            'Else
+            '    fd.FileName = My.Settings.PATH_FOLDER_PIC1 & pTGRT & ".jpg"
 
-            End If
+            'End If
+
+            fd.FileName = My.Settings.PATH_FOLDER_PIC1 & pTGRT & ".jpg"
+
             PathImportPIC = fd.FileName
             'txtPathImportPIC.Text = fd.FileName
             '  PictureBox3.ImageLocation = fd.FileName

@@ -115,7 +115,7 @@ Public Class frmLogin
         Application.DoEvents()
         txtUsername.Enabled = False
         txtPassword.Enabled = False
-        wait(4000)
+        'wait(4000)
 
 
 
@@ -265,7 +265,8 @@ Public Class frmLogin
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Call LOGIN()
+        'Call LOGIN()
+        LOGIN()
     End Sub
 
 
@@ -307,6 +308,7 @@ Public Class frmLogin
 
             Dim config As New frmConfigDb()
             config.ShowDialog()
+
 
 
         End If

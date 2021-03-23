@@ -57,15 +57,13 @@ Partial Class frmConfigDb
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.txtPicture_folder2 = New System.Windows.Forms.TextBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.TabPage1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         CType(Me.txtCutdigit.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabPage1
@@ -272,7 +270,6 @@ Partial Class frmConfigDb
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -282,6 +279,7 @@ Partial Class frmConfigDb
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.Button1)
         Me.TabPage3.Controls.Add(Me.txtPicture_folder1_zoom)
         Me.TabPage3.Controls.Add(Me.Label7)
         Me.TabPage3.Controls.Add(Me.Label8)
@@ -305,42 +303,46 @@ Partial Class frmConfigDb
         '
         'txtPicture_folder1_zoom
         '
-        Me.txtPicture_folder1_zoom.Location = New System.Drawing.Point(148, 58)
+        Me.txtPicture_folder1_zoom.Location = New System.Drawing.Point(155, 267)
         Me.txtPicture_folder1_zoom.Name = "txtPicture_folder1_zoom"
         Me.txtPicture_folder1_zoom.Size = New System.Drawing.Size(137, 20)
         Me.txtPicture_folder1_zoom.TabIndex = 57
+        Me.txtPicture_folder1_zoom.Visible = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(6, 61)
+        Me.Label7.Location = New System.Drawing.Point(13, 270)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(142, 13)
         Me.Label7.TabIndex = 55
         Me.Label7.Text = "PICTURE 1 FOLDER Zoom:"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label7.Visible = False
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 87)
+        Me.Label8.Location = New System.Drawing.Point(13, 296)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(142, 13)
         Me.Label8.TabIndex = 56
         Me.Label8.Text = "PICTURE 2 FOLDER Zoom:"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label8.Visible = False
         '
         'txtPicture_folder2_zoom
         '
-        Me.txtPicture_folder2_zoom.Location = New System.Drawing.Point(148, 84)
+        Me.txtPicture_folder2_zoom.Location = New System.Drawing.Point(155, 293)
         Me.txtPicture_folder2_zoom.Name = "txtPicture_folder2_zoom"
         Me.txtPicture_folder2_zoom.Size = New System.Drawing.Size(137, 20)
         Me.txtPicture_folder2_zoom.TabIndex = 58
+        Me.txtPicture_folder2_zoom.Visible = False
         '
         'txtCutdigit
         '
         Me.txtCutdigit.EditValue = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.txtCutdigit.Location = New System.Drawing.Point(148, 110)
+        Me.txtCutdigit.Location = New System.Drawing.Point(155, 319)
         Me.txtCutdigit.Name = "txtCutdigit"
         Me.txtCutdigit.Properties.Buttons.AddRange(New DevExpress.XtraEditors.Controls.EditorButton() {New DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)})
         Me.txtCutdigit.Properties.Mask.EditMask = "N0"
@@ -353,7 +355,7 @@ Partial Class frmConfigDb
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(54, 113)
+        Me.Label6.Location = New System.Drawing.Point(61, 322)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(67, 13)
         Me.Label6.TabIndex = 53
@@ -363,7 +365,7 @@ Partial Class frmConfigDb
         '
         'txtPicture_folder1
         '
-        Me.txtPicture_folder1.Location = New System.Drawing.Point(148, 6)
+        Me.txtPicture_folder1.Location = New System.Drawing.Point(155, 26)
         Me.txtPicture_folder1.Name = "txtPicture_folder1"
         Me.txtPicture_folder1.Size = New System.Drawing.Size(137, 20)
         Me.txtPicture_folder1.TabIndex = 51
@@ -371,7 +373,7 @@ Partial Class frmConfigDb
         'Button6
         '
         Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button6.Location = New System.Drawing.Point(210, 159)
+        Me.Button6.Location = New System.Drawing.Point(217, 179)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 23)
         Me.Button6.TabIndex = 44
@@ -381,7 +383,7 @@ Partial Class frmConfigDb
         'Button7
         '
         Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button7.Location = New System.Drawing.Point(129, 159)
+        Me.Button7.Location = New System.Drawing.Point(136, 179)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(75, 23)
         Me.Button7.TabIndex = 45
@@ -391,7 +393,7 @@ Partial Class frmConfigDb
         'Button8
         '
         Me.Button8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Button8.Location = New System.Drawing.Point(25, 159)
+        Me.Button8.Location = New System.Drawing.Point(32, 179)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(98, 23)
         Me.Button8.TabIndex = 46
@@ -402,7 +404,7 @@ Partial Class frmConfigDb
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(6, 9)
+        Me.Label23.Location = New System.Drawing.Point(13, 29)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(115, 13)
         Me.Label23.TabIndex = 47
@@ -412,52 +414,34 @@ Partial Class frmConfigDb
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(6, 35)
+        Me.Label24.Location = New System.Drawing.Point(13, 244)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(115, 13)
         Me.Label24.TabIndex = 48
         Me.Label24.Text = "PICTURE 2 FOLDER :"
         Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label24.Visible = False
         '
         'txtPicture_folder2
         '
-        Me.txtPicture_folder2.Location = New System.Drawing.Point(148, 32)
+        Me.txtPicture_folder2.Location = New System.Drawing.Point(155, 241)
         Me.txtPicture_folder2.Name = "txtPicture_folder2"
         Me.txtPicture_folder2.Size = New System.Drawing.Size(137, 20)
         Me.txtPicture_folder2.TabIndex = 52
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.Button1)
-        Me.TabPage2.Controls.Add(Me.TextBox1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(309, 352)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "RUN SQL"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(114, 182)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "RUN SQL"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(8, 6)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(295, 172)
-        Me.TextBox1.TabIndex = 0
+        Me.txtPicture_folder2.Visible = False
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(217, 52)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 59
+        Me.Button1.Text = "Select folder"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmConfigDb
         '
@@ -475,8 +459,6 @@ Partial Class frmConfigDb
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         CType(Me.txtCutdigit.Properties, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
         Me.ResumeLayout(false)
 
 End Sub
@@ -498,9 +480,6 @@ End Sub
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents txtPicture_folder1 As System.Windows.Forms.TextBox
     Friend WithEvents Button6 As System.Windows.Forms.Button
@@ -519,4 +498,6 @@ End Sub
     Friend WithEvents Button2 As Button
     Friend WithEvents Label9 As Label
     Friend WithEvents txtPahtFile As TextBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents FolderBrowserDialog1 As FolderBrowserDialog
 End Class
