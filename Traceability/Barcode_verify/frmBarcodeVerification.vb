@@ -64,7 +64,8 @@ Public Class frmBarcodeVerification
             StrSQL.Append(" ,FORMAT([f_Import_TimeStamp],'dd-MM-yyyy HH:mm:ss') as [f_Import_TimeStamp]")
             StrSQL.Append(" ,FORMAT([f_Edit_TimeStamp],'dd-MM-yyyy HH:mm:ss') as [f_Edit_TimeStamp]")
             StrSQL.Append(" From Tbl_Master_Product")
-            StrSQL.Append(" WHERE [f_TGRT_Barcode]='" & tmp_Qr & "'")
+            'StrSQL.Append(" WHERE [f_TGRT_Barcode]='" & tmp_Qr & "'")
+            StrSQL.Append(" WHERE [f_Customer_Barcode]='" & tmp_Qr & "'")
 
             tmp_tb = DatabaseConnection.OleDBConnect.Access.Read(StrSQL.ToString, css, False)
 
@@ -189,9 +190,9 @@ Public Class frmBarcodeVerification
 
 
             lblScan2.Text = Dummy_qr
-            If lblCusBarcode.Text.ToLower.Trim <> lblScan2.Text.ToLower.Trim Then
+            If lblBarcode.Text.ToLower.Trim <> lblScan2.Text.ToLower.Trim Then
 
-                Dim strMessage As String = "Barcode scan ('" & Dummy_qr & "') not match with ('" & lblCusBarcode.Text & "')"
+                Dim strMessage As String = "Barcode scan ('" & Dummy_qr & "') not match with ('" & lblBarcode.Text & "')"
                 ' MetroMessageBox.Show(Me, strMessage, "Error data", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 '  Call Clear_Default()
                 Keep_Log_Scan("NG")
@@ -273,8 +274,8 @@ Public Class frmBarcodeVerification
             StrSQL.Append("( ")
 
             StrSQL.Append(" '" & lblTGRT_Code.Text & "'")
-            StrSQL.Append(" ,'" & lblScan1.Text & "'")
             StrSQL.Append(" ,'" & lblScan2.Text & "'")
+            StrSQL.Append(" ,'" & lblScan1.Text & "'")
             StrSQL.Append(" ,'" & lblPartName.Text & "'")
             StrSQL.Append(" ,'" & lblPartNo.Text & "'")
             StrSQL.Append(" ,'" & C_Variable.USER_LOGIN & "'")

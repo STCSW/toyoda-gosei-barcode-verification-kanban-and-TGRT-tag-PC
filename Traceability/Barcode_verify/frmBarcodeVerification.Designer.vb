@@ -143,11 +143,11 @@ Partial Class frmBarcodeVerification
         Me.lblStatusWait.AutoSize = True
         Me.lblStatusWait.BackColor = System.Drawing.Color.Orange
         Me.lblStatusWait.Font = New System.Drawing.Font("Microsoft Sans Serif", 27.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatusWait.Location = New System.Drawing.Point(59, 4)
+        Me.lblStatusWait.Location = New System.Drawing.Point(83, 4)
         Me.lblStatusWait.Name = "lblStatusWait"
-        Me.lblStatusWait.Size = New System.Drawing.Size(593, 42)
+        Me.lblStatusWait.Size = New System.Drawing.Size(558, 42)
         Me.lblStatusWait.TabIndex = 10
-        Me.lblStatusWait.Text = "WAINT SCAN CUSTOMER CODE"
+        Me.lblStatusWait.Text = "WAINT SCAN TGRT BARCODE"
         Me.lblStatusWait.Visible = False
         '
         'lblStatusOK
@@ -238,21 +238,21 @@ Partial Class frmBarcodeVerification
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label10.Location = New System.Drawing.Point(22, 61)
+        Me.Label10.Location = New System.Drawing.Point(13, 60)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(99, 20)
+        Me.Label10.Size = New System.Drawing.Size(108, 20)
         Me.Label10.TabIndex = 21
-        Me.Label10.Text = "CUS SCAN :"
+        Me.Label10.Text = "TGRT SCAN :"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label8.Location = New System.Drawing.Point(13, 21)
+        Me.Label8.Location = New System.Drawing.Point(22, 21)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(108, 20)
+        Me.Label8.Size = New System.Drawing.Size(99, 20)
         Me.Label8.TabIndex = 20
-        Me.Label8.Text = "TGRT SCAN :"
+        Me.Label8.Text = "CUS SCAN :"
         '
         'GroupBox1
         '
@@ -288,17 +288,18 @@ Partial Class frmBarcodeVerification
         'lblCusBarcode
         '
         Me.lblCusBarcode.AutoSize = True
-        Me.lblCusBarcode.BackColor = System.Drawing.Color.MediumSpringGreen
-        Me.lblCusBarcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblCusBarcode.BackColor = System.Drawing.Color.Transparent
+        Me.lblCusBarcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblCusBarcode.Location = New System.Drawing.Point(140, 69)
         Me.lblCusBarcode.Name = "lblCusBarcode"
-        Me.lblCusBarcode.Size = New System.Drawing.Size(39, 20)
+        Me.lblCusBarcode.Size = New System.Drawing.Size(33, 20)
         Me.lblCusBarcode.TabIndex = 17
         Me.lblCusBarcode.Text = "......"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.BackColor = System.Drawing.Color.MediumSpringGreen
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label4.Location = New System.Drawing.Point(32, 47)
         Me.Label4.Name = "Label4"
@@ -309,11 +310,11 @@ Partial Class frmBarcodeVerification
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.MediumSpringGreen
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.Label9.Location = New System.Drawing.Point(0, 69)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(142, 20)
+        Me.Label9.Size = New System.Drawing.Size(129, 20)
         Me.Label9.TabIndex = 16
         Me.Label9.Text = "Cus BARCODE :"
         '
@@ -374,6 +375,7 @@ Partial Class frmBarcodeVerification
         'lblBarcode
         '
         Me.lblBarcode.AutoSize = True
+        Me.lblBarcode.BackColor = System.Drawing.Color.MediumSpringGreen
         Me.lblBarcode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblBarcode.Location = New System.Drawing.Point(140, 47)
         Me.lblBarcode.Name = "lblBarcode"
