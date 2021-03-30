@@ -298,7 +298,7 @@ Public Class frmImport1
                 Dim View As DevExpress.XtraGrid.Views.Grid.GridView = GridControl1.FocusedView
                 Dim row As DataRowView
 
-                For index = 1 To DGV.RowCount - 1
+                For index = 0 To DGV.RowCount - 1
                     PGB1.Text = index
                     Application.DoEvents()
 
@@ -318,18 +318,18 @@ Public Class frmImport1
                     StrSQL.Append(",f_Edit_TimeStamp")
                     StrSQL.Append(")")
                     StrSQL.Append("Values(")
-                    StrSQL.Append("'" & Row.Item(1).ToString.Trim & "'")
-                    StrSQL.Append(",'" & Row.Item(2).ToString.Trim & "'")
-                    StrSQL.Append(",'" & Row.Item(3).ToString.Trim & "'")
-                    StrSQL.Append(",'" & Row.Item(4).ToString.Trim & "'")
-                    StrSQL.Append(",'" & Row.Item(5).ToString.Trim & "'")
+                    StrSQL.Append("'" & row.Item(1).ToString.Trim & "'")
+                    StrSQL.Append(",'" & row.Item(2).ToString.Trim & "'")
+                    StrSQL.Append(",'" & row.Item(3).ToString.Trim & "'")
+                    StrSQL.Append(",'" & row.Item(4).ToString.Trim & "'")
+                    StrSQL.Append(",'" & row.Item(5).ToString.Trim & "'")
                     StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
                     StrSQL.Append(",'" & C_Variable.USER_LOGIN & "'")
                     StrSQL.Append(", Now() ")
                     StrSQL.Append(", Now() ")
                     StrSQL.Append(")")
                     DatabaseConnection.OleDBConnect.Access.Execute(StrSQL.ToString, css, False)
-
+                    Application.DoEvents()
                 Next
 
                 CLS_ALERT_UI.AlertInformation("Import Complete", Color.Green, Color.White, Me.Width, 200, True, Me.Height / 2)
